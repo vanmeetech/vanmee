@@ -1,0 +1,73 @@
+---
+const { hero, ctaPrimary, ctaSecondary } = Astro.props;
+---
+<section class="hero-radial grid-bg overflow-hidden border-b border-line/70">
+  <div class="mx-auto grid max-w-8xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:py-28">
+    <div class="relative">
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-white/90 px-4 py-2 text-sm text-slateblue shadow-soft">
+        <span class="h-2 w-2 rounded-full bg-success"></span>
+        {hero.badge}
+      </div>
+      <h1 class="max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-navy sm:text-5xl lg:text-6xl">
+        {hero.title}
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slateblue sm:text-xl">
+        {hero.description}
+      </p>
+      <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+        <a
+          href="#rfq"
+          class="inline-flex items-center justify-center rounded-full bg-navy px-6 py-3.5 text-base font-medium text-white transition hover:bg-ink"
+        >
+          {ctaPrimary}
+        </a>
+        <a
+          href="#rfq"
+          class="inline-flex items-center justify-center rounded-full border border-line bg-white px-6 py-3.5 text-base font-medium text-ink transition hover:border-slateblue hover:text-navy"
+        >
+          {ctaSecondary}
+        </a>
+      </div>
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        {hero.trust.map((item) => (
+          <div class="rounded-2xl border border-line bg-white/90 p-4 shadow-soft">
+            <p class="text-sm font-medium text-navy">{item.title}</p>
+            <p class="mt-2 text-sm leading-6 text-slateblue">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="relative">
+      <div class="rounded-[24px] border border-line bg-white p-6 shadow-soft sm:p-8">
+        <div class="flex items-center justify-between border-b border-line pb-5">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-[0.16em] text-slateblue">Project Entry</p>
+            <h2 class="mt-2 text-2xl font-semibold text-navy">{hero.panelTitle}</h2>
+          </div>
+          <span class="rounded-full bg-mist px-3 py-1 text-xs font-medium text-slateblue">RFQ / Validation</span>
+        </div>
+        <div class="mt-6 space-y-4">
+          {hero.panelSteps.map((step, index) => (
+            <div class="rounded-2xl border border-line p-4">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-sm font-medium text-navy">{step.title}</p>
+                  <p class="mt-2 text-sm leading-6 text-slateblue">{step.text}</p>
+                </div>
+                <span class="rounded-full bg-mist px-3 py-1 text-xs font-medium text-slateblue">
+                  Step 0{index + 1}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 rounded-2xl bg-navy p-5 text-white">
+          <p class="text-sm uppercase tracking-[0.14em] text-white/70">Best-fit requests</p>
+          <ul class="mt-3 space-y-2 text-sm leading-6 text-white/90">
+            {hero.panelList.map((item) => <li>- {item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

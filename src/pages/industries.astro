@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+const industries = [["自动化设备", "支架、机构件、机箱结构、装配接口与验证模型。"], ["机器人", "外壳、骨架、安装件与装配验证件。"], ["新能源装备", "结构试制、功能件验证与工艺协同。"], ["医疗设备", "对精度、装配和验证节奏要求较高。"], ["汽车零部件", "试制验证、配合关系确认与样件推进。"], ["科研院所", "实验装置、验证模型与研究型硬件项目。"]];
+---
+<BaseLayout title="行业方案 | VANMEE 凡觅" description="行业方案覆盖自动化设备、机器人、新能源装备、医疗设备、汽车零部件与科研院所。">
+  <section class="section"><div class="container"><SectionTitle kicker="Industries" title="行业方案" subtitle="行业应用的共性，不是名词，而是对验证效率和交付可靠性的要求。" /><div class="grid-3">{industries.map((i) => (<article class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div></div></section>
+</BaseLayout>

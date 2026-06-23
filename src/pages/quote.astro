@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="RFQ System V2">
+
+<div class="container section">
+
+  <h1 class="h1">工业报价系统</h1>
+
+  <!-- UPLOAD -->
+  <div class="panel" style="padding:20px;margin-top:20px">
+    <input type="file" id="file" />
+
+    <button class="btn btn-primary" onclick="analyze()">
+      分析模型
+    </button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="grid-2" style="margin-top:20px">
+
+    <div class="card">
+      <h3>DFM评分</h3>
+      <div id="score">--</div>
+    </div>
+
+    <div class="card">
+      <h3>风险</h3>
+      <ul id="issues"></ul>
+    </div>
+
+  </div>
+
+  <!-- QUOTE -->
+  <div class="panel" style="margin-top:20px;padding:20px">
+    <h3>报价结果</h3>
+    <div id="price">--</div>
+  </div>
+
+</div>
+
+<script>
+async function analyze(){
+
+  const file = document.getElementById('file').files[0];
+
+  const form = new FormData();
+  form.append('file', file);
+
+  const res = await fetch('/api/analyze', {
+    method:'POST',
+    body:form
+  });
+
+  const data = await res.json();
+
+  document.getElementById('score').innerText = data.dfm.score;
+
+  document.getElementById('issues').innerHTML =
+    data.dfm.issues.map(i => `<li>${i}</li>`).join('');
+
+  const q = await fetch('/api/quote',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  });
+
+  const quote = await q.json();
+
+  document.getElementById('price').innerText =
+    "¥ " + quote.quote.final;
+
+}
+</script>
+
+</BaseLayout>

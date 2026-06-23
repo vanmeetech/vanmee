@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const items = [
+  ["3D Printing", "SLA / SLS / FDM for appearance, structure and rapid iteration."],
+  ["CNC Machining", "Aluminum, stainless steel, engineering plastics and precision functional parts."],
+  ["Sheet Metal", "Enclosures, brackets and assembly-related structural parts."],
+  ["Finishing", "Painting, sanding, polishing, blasting, rework and appearance finishing."],
+  ["Assembly & Testing", "Assembly, functional testing, interference checks and pre-delivery confirmation."],
+  ["Supply Chain Integration", "Resources matched to lead time, cost and quality requirements."],
+];
+---
+<BaseLayout title="Capabilities | VANMEE" description="Capabilities cover 3D printing, CNC machining, sheet metal, finishing, assembly testing and supply chain integration.">
+  <section class="section"><div class="container"><SectionTitle kicker="Capabilities" title="Manufacturing capability matrix" subtitle="Not a process list — an engineering delivery system." /><div class="grid-3">{items.map((i) => (<article class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div></div></section>
+</BaseLayout>

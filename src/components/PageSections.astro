@@ -1,0 +1,40 @@
+---
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import PainPoints from './PainPoints.astro';
+import Services from './Services.astro';
+import Validation from './Validation.astro';
+import Capabilities from './Capabilities.astro';
+import Industries from './Industries.astro';
+import Cases from './Cases.astro';
+import Trust from './Trust.astro';
+import RFQ from './RFQ.astro';
+import Contact from './Contact.astro';
+import SiteScripts from './SiteScripts.astro';
+
+const { content, isEnglish = false } = Astro.props;
+---
+<Header
+  homeLabel={content.homeLabel}
+  brandLine={content.brandLine}
+  nav={content.nav}
+  switchLabel={content.switchLabel}
+  switchHref={content.switchHref}
+  switchLang={content.switchLang}
+  cta={content.ctaSecondary}
+/>
+
+<main id="top" class={isEnglish ? 'font-en antialiased' : 'font-zh antialiased'}>
+  <Hero hero={content.hero} ctaPrimary={content.ctaPrimary} ctaSecondary={content.ctaSecondary} />
+  <PainPoints pain={content.pain} />
+  <Services services={content.services} />
+  <Validation validation={content.validation} />
+  <Capabilities capabilities={content.capabilities} />
+  <Industries industries={content.industries} />
+  <Cases cases={content.cases} />
+  <Trust trust={content.trust} />
+  <RFQ rfq={content.rfq} locale={isEnglish ? 'en' : 'zh'} />
+  <Contact contact={content.contact} switchHref={content.switchHref} switchLabel={content.switchLabel} isEnglish={isEnglish} />
+</main>
+
+<SiteScripts />

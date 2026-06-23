@@ -1,0 +1,7 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+---
+<BaseLayout title="Upload | VANMEE" description="Upload STEP, STL or PDF files to get engineering review.">
+  <section class="section"><div class="container"><SectionTitle kicker="Upload" title="Upload files" subtitle="Supports STEP, STL, PDF and project briefs." /><div class="content-grid"><div class="panel" style="padding:24px;"><form class="form"><div class="field"><label>File upload</label><input class="input" type="file" /></div><div class="field"><label>Project type</label><select class="select"><option>Validation model</option><option>Structural part</option><option>Assembly part</option><option>Trial run</option></select></div><div class="field"><label>Short brief</label><textarea class="textarea" placeholder="Material, quantity, lead time, precision, assembly, finish..."></textarea></div><div class="btn-row"><button type="button" class="btn btn-primary">Submit Review</button><a class="btn btn-secondary" href="/en/quote">Go to Quote</a></div></form></div><div class="panel" style="padding:24px;"><div class="pill">Upload Rules</div><ul class="list-check" style="margin-top:14px;"><li>STEP / STL is preferred</li><li>Attach PDF drawings if available</li><li>Validation goals help us decide faster</li><li>Complex projects benefit from fit and quantity details</li></ul></div></div></div></section>
+</BaseLayout>

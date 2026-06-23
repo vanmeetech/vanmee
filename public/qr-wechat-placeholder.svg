@@ -1,0 +1,61 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="[w3.org](http://www.w3.org/2000/svg)" role="img" aria-label="WeChat QR placeholder">
+  <rect width="512" height="512" rx="32" fill="#F7F9FC"/>
+  <rect x="48" y="48" width="416" height="416" rx="24" fill="white" stroke="#D9E1EA" stroke-width="8"/>
+  <rect x="84" y="84" width="96" height="96" rx="12" fill="#0B1F3A"/>
+  <rect x="108" y="108" width="48" height="48" rx="8" fill="white"/>
+  <rect x="332" y="84" width="96" height="96" rx="12" fill="#0B1F3A"/>
+  <rect x="356" y="108" width="48" height="48" rx="8" fill="white"/>
+  <rect x="84" y="332" width="96" height="96" rx="12" fill="#0B1F3A"/>
+  <rect x="108" y="356" width="48" height="48" rx="8" fill="white"/>
+
+  <rect x="236" y="92" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="268" y="92" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="236" y="124" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="300" y="124" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="204" y="188" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="236" y="188" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="268" y="188" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="332" y="188" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="364" y="188" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="396" y="188" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="92" y="220" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="124" y="220" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="156" y="220" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="220" y="220" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="252" y="220" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="284" y="220" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="348" y="220" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="380" y="220" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="92" y="252" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="156" y="252" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="188" y="252" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="252" y="252" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="316" y="252" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="348" y="252" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="412" y="252" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="92" y="284" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="124" y="284" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="220" y="284" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="284" y="284" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="316" y="284" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="380" y="284" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="188" y="316" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="220" y="316" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="252" y="316" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="316" y="316" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="348" y="316" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="380" y="316" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="412" y="316" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="220" y="348" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="252" y="348" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="316" y="348" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="348" y="348" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="220" y="380" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="284" y="380" width="20" height="20" rx="4" fill="#0B1F3A"/>
+  <rect x="316" y="380" width="20" height="20" rx="4" fill="#6B7C93"/>
+  <rect x="380" y="380" width="20" height="20" rx="4" fill="#0B1F3A"/>
+
+  <text x="256" y="470" text-anchor="middle" fill="#6B7C93" font-family="Arial, sans-serif" font-size="20">
+    Replace with official WeChat QR
+  </text>
+</svg>

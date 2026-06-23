@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+const items = [["DV 设计验证", "判断方案是否符合核心设计意图，避免错误方向继续放大。"], ["SV 结构验证", "围绕结构关系、受力与装配前提展开判断。"], ["AV 装配验证", "关注配合关系、安装顺序与接口一致性。"], ["FV 功能验证", "将结构与实际使用功能联系起来，避免功能偏差。"], ["DFM 可制造性分析", "在试制前识别加工与装配的现实限制。"]];
+const value = [["更早发现问题", "把风险留在验证阶段，而不是把代价留到试制之后。"], ["减少返工", "通过结构、装配与工艺前置判断，减少迭代。"], ["提高试制成功率", "进入试制阶段前把需求变得更完整、更清楚。"]];
+---
+<BaseLayout title="验证体系 | VANMEE 凡觅" description="验证体系覆盖 DV、SV、AV、FV 与 DFM，帮助项目更早发现问题并减少返工。">
+  <section class="section"><div class="container"><SectionTitle kicker="Validation" title="验证体系" subtitle="验证体系的价值，不是增加流程，而是更早发现问题并减少返工。" /><div class="grid-5">{items.map((i) => (<article class="card"><div class="pill" style="margin-bottom:12px;">{i[0].split(" ")[0]}</div><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div><div style="margin-top:26px;" class="panel"><div style="padding:26px;"><div class="grid-3">{value.map((i) => (<div class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></div>))}</div></div></div></div></section>
+</BaseLayout>

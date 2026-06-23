@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<Layout title="RFQ | 工业快速报价系统">
+
+<div class="container section">
+
+  <!-- HEADER -->
+  <div class="section-title">
+    <span class="pill">RFQ SYSTEM · V4</span>
+    <h1 class="h1">上传模型，自动生成报价</h1>
+    <p class="lead">
+      支持 STEP / STL / OBJ · 自动DFM分析 · 即时报价生成
+    </p>
+  </div>
+
+  <!-- UPLOAD AREA -->
+  <div class="upload-zone" id="uploadZone">
+
+    <input type="file" id="fileInput" hidden />
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <strong>拖拽上传 3D 模型</strong>
+      <span class="muted">或点击选择文件（STEP / STL / OBJ）</span>
+
+      <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+        上传文件
+      </button>
+    </div>
+
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid-2" style="margin-top:24px">
+
+    <!-- 3D VIEWER -->
+    <div class="panel" style="min-height:420px; padding:18px;">
+      <h3 class="h3">3D 预览</h3>
+      <div id="viewer" style="height:360px; background:rgba(0,0,0,.2); border-radius:12px;">
+        <!-- Three.js / model viewer future -->
+      </div>
+    </div>
+
+    <!-- DFM PANEL -->
+    <div class="panel" style="padding:18px;">
+      <h3 class="h3">DFM分析</h3>
+
+      <div class="card" style="margin-top:12px">
+        <div>壁厚检查</div>
+        <span class="badge">自动检测中</span>
+      </div>
+
+      <div class="card">
+        <div>结构强度</div>
+        <span class="badge">待分析</span>
+      </div>
+
+      <div class="card">
+        <div>可制造性评分</div>
+        <strong style="color:var(--brand)">-- / 100</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- PRICING -->
+  <div class="panel" style="margin-top:24px; padding:20px;">
+    <h3 class="h3">实时报价</h3>
+
+    <div class="grid-3" style="margin-top:14px">
+
+      <div class="card">
+        <div class="muted">快速方案</div>
+        <strong>$ 0.00</strong>
+      </div>
+
+      <div class="card">
+        <div class="muted">标准方案</div>
+        <strong>$ 0.00</strong>
+      </div>
+
+      <div class="card">
+        <div class="muted">工业级方案</div>
+        <strong>$ 0.00</strong>
+      </div>
+
+    </div>
+
+    <div class="btn-row" style="margin-top:16px">
+      <a class="btn btn-primary">生成报价</a>
+      <a class="btn btn-secondary">下载DFM报告</a>
+    </div>
+
+  </div>
+
+</div>
+
+</BaseLayout>

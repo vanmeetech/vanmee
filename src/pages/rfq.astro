@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+---
+
+<BaseLayout title="VANMEE RFQ System" description="上传 文件，获取工程评估。">
+
+<input type="file" id="file" />
+
+<button onclick="run()">分析</button>
+
+<div id="out"></div>
+
+<script>
+async function run(){
+
+  const file = document.getElementById("file").files[0];
+
+  const form = new FormData();
+  form.append("file", file);
+
+  const res = await fetch("/api/analyze", {
+    method: "POST",
+    body: form
+  });
+
+  const data = await res.json();
+
+  if(data.error){
+    document.getElementById("out").innerText = data.error;
+    return;
+  }
+
+  document.getElementById("out").innerHTML = `
+    <h3>DFM: ${data.dfm.score}</h3>
+    <p>尺寸X: ${data.model.bbox.x.toFixed(2)}</p>
+    <p>报价: ¥${data.cost.total}</p>
+  `;
+}
+</script></BaseLayout>

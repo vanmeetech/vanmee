@@ -1,0 +1,19 @@
+---
+const { industries } = Astro.props;
+---
+<section class="section-anchor border-b border-line/70 bg-white py-20" id="industries">
+  <div class="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium uppercase tracking-[0.16em] text-slateblue">{industries.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">{industries.title}</h2>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {industries.items.map((item) => (
+        <article class="rounded-3xl border border-line bg-mist p-6">
+          <h3 class="text-lg font-semibold text-navy">{item.title}</h3>
+          <p class="mt-3 text-sm leading-7 text-slateblue">{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

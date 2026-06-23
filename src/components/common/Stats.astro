@@ -1,0 +1,4 @@
+---
+const { items } = Astro.props;
+---
+<div class="stat-row">{items.map((item) => <div class="stat"><strong>{item.title}</strong><span>{item.desc}</span></div>)}</div>

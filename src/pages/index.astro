@@ -1,16 +1,21 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroTech from "../components/common/HeroTech.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+import Stats from "../components/common/Stats.astro";
+const metrics = [{ title: "2005+", desc: "工业业务起点" }, { title: "2015+", desc: "增材制造积累" }, { title: "72h", desc: "工程响应效率" }, { title: "100+", desc: "项目协同经验" }];
+const capabilities = [{ title: "工程验证", desc: "围绕装配、结构、功能和制造可行性前置判断。", tag: "EVT / DVT / PVT" }, { title: "试制交付", desc: "支持工业样机、小批量试制与工程验证样件。", tag: "Prototype / Trial Run" }, { title: "制造协同", desc: "整合 CNC、3D打印、钣金、表面处理与装配。", tag: "Coordination" }];
+const workflow = [{ step: "01", title: "需求进入", text: "上传模型或说明需求，确认目标、材料、交期和验证阶段。" }, { step: "02", title: "工程评估", text: "识别壁厚、装配、公差、结构和工艺风险。" }, { step: "03", title: "多方案报价", text: "给出工艺建议、价格区间和推进路径。" }, { step: "04", title: "试制交付", text: "完成生产、后处理、装配、检验与交付。" }];
+const industries = ["自动化设备", "机器人", "新能源装备", "医疗设备", "汽车零部件", "科研院所"];
+const cases = [{ title: "机器人外壳验证项目", meta: "2200mm / 12天交付", desc: "通过分件验证与装配协同，完成结构与外观联调。" }, { title: "自动化设备样机", meta: "用于客户验收", desc: "以样机加速客户验证和内部评审流程。" }, { title: "新能源储能设备展示模型", meta: "多工艺协同", desc: "整合打印、喷涂和装配，完成展示级交付。" }];
+const stats = [{ title: "SLA / SLS / FDM", desc: "增材工艺矩阵" }, { title: "CNC / 钣金 / 装配", desc: "结构件交付" }, { title: "项目整合", desc: "一窗式对接" }, { title: "工程判断", desc: "前置 DFM" }];
 ---
-
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>VANMEE凡觅</title>
-  </head>
-  <body>
-    <h1>VANMEE凡觅</h1>
-    <h1>VANMEE凡觅</h1>
-  </body>
-</html>
+<BaseLayout title="VANMEE 凡觅 | 产品工程验证与智造协同服务" description="VANMEE 凡觅专注于产品量产前的工程验证、试制交付与制造协同。">
+  <HeroTech kicker="VANMEE 凡觅" title="产品量产前工程验证与试制交付" subtitle="专注产品量产前的工程验证、试制交付与制造协同。让创新产品更快落地。" primaryHref="/upload" primaryLabel="上传文件" secondaryHref="/quote" secondaryLabel="获取报价" metrics={metrics} chips={["STEP / STL", "DFM", "试制交付", "制造协同"]} titleRight="Engineering Validation & Manufacturing OS" />
+  <section class="section section-dark"><div class="container"><SectionTitle kicker="Core Value" title="我们不是单一工厂，而是一套工程决策和制造协同系统。" subtitle="把工程判断前置，把制造路径做清楚，把交付链条压短。" /><div class="grid-3">{capabilities.map((c) => (<article class="card"><div class="pill">{c.tag}</div><h3 class="h3" style="margin-top:14px;">{c.title}</h3><p class="muted">{c.desc}</p></article>))}</div></div></section>
+  <section class="section"><div class="container"><SectionTitle kicker="Workflow" title="从需求到交付，路径更短，判断更清晰。" subtitle="首页不仅是展示，更是进入项目处理流程的起点。" /><div class="timeline">{workflow.map((item) => (<article class="timeline-item"><span class="pill">{item.step}</span><strong>{item.title}</strong><p>{item.text}</p></article>))}</div></div></section>
+  <section class="section section-dark"><div class="container"><SectionTitle kicker="Industries" title="行业覆盖" subtitle="面向工程验证、试制交付和多工艺协同的行业场景。" /><div class="grid-3">{industries.map((item) => <div class="card" style="padding:18px 20px;">{item}</div>)}</div></div></section>
+  <section class="section"><div class="container"><SectionTitle kicker="Cases" title="案例不是展示，而是工程判断逻辑。" subtitle="每个案例都应说明问题、方案、结果，而不是仅仅放图。" /><div class="grid-3">{cases.map((item) => (<article class="card"><div class="badge" style="margin-bottom:12px;">{item.meta}</div><h3 class="h3">{item.title}</h3><p class="muted">{item.desc}</p></article>))}</div></div></section>
+  <section class="section section-dark"><div class="container"><SectionTitle kicker="Capabilities" title="制造能力矩阵" subtitle="围绕样机、验证模型、结构件和试制交付展开。" /><Stats items={stats} /></div></section>
+  <section class="section"><div class="container"><div class="panel" style="padding:26px;"><div class="grid-2" style="align-items:center;"><div><div class="kicker">RFQ</div><h2 class="h2">上传文件，获取工程评估和报价。</h2><p class="lead">支持 STEP、STL、PDF、草图和项目说明。工程人员将根据验证目标、材料、交期和风险给出路径建议。</p></div><div style="justify-self:end;"><div class="btn-row"><a class="btn btn-primary" href="/upload">上传文件</a><a class="btn btn-secondary" href="/contact">联系凡觅</a></div></div></div></div></div></section>
+</BaseLayout>

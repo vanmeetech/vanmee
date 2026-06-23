@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+const items = [
+  ["3D 打印", "SLA / SLS / FDM，用于外观验证、结构验证与快速迭代。"],
+  ["CNC 加工", "铝合金、不锈钢、工程塑料与高精度功能件加工。"],
+  ["钣金制造", "机箱、支架、外壳及装配相关结构件。"],
+  ["表面处理", "喷涂、打磨、抛光、喷砂、修面与外观处理。"],
+  ["装配测试", "装配、功能测试、干涉检查与交付前确认。"],
+  ["供应链整合", "整合内部与外部资源，适配交期、成本和质量要求。"],
+];
+---
+<BaseLayout title="制造能力 | VANMEE 凡觅" description="制造能力覆盖 3D 打印、CNC 加工、钣金制造、表面处理、装配测试与供应链整合。">
+  <section class="section"><div class="container"><SectionTitle kicker="Capabilities" title="制造能力矩阵" subtitle="不是工艺清单，而是工程交付能力。" /><div class="grid-3">{items.map((i) => (<article class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div></div></section>
+</BaseLayout>

@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const cases = [["Robot Enclosure Validation", "2200mm / 12 days", "Split-part validation and assembly coordination for structure and appearance."], ["Automation Prototype", "For customer acceptance", "Prototype-first workflow to speed up internal and customer review."], ["Medical Validation Model", "High precision", "Validation around function, fit and appearance."], ["Energy Storage Display Model", "Multi-process coordination", "Printing, painting and assembly for display-level delivery."], ["Industrial Robot Display Model", "Premium appearance", "For exhibition, promotion and launch events."], ["Research Equipment Validation", "R&D first", "Used for engineering validation and design review."]];
+---
+<BaseLayout title="Case Studies | VANMEE" description="Case studies cover robots, automation, medical devices, energy, display and research equipment.">
+  <section class="section"><div class="container"><SectionTitle kicker="Cases" title="Case studies" subtitle="Cases prove engineering judgment, not just visuals." /><div class="grid-3">{cases.map((i) => (<article class="card"><div class="badge" style="margin-bottom:12px;">{i[1]}</div><h3 class="h3">{i[0]}</h3><p class="muted">{i[2]}</p></article>))}</div></div></section>
+</BaseLayout>

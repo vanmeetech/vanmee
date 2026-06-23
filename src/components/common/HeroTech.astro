@@ -1,0 +1,18 @@
+---
+const { kicker, title, subtitle, primaryHref, primaryLabel, secondaryHref, secondaryLabel, metrics = [], chips = [], titleRight = "Engineering Control Tower", } = Astro.props;
+---
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">{kicker}</div>
+        <h1 class="h1">{title}</h1>
+        <p class="lead">{subtitle}</p>
+        <div class="btn-row" style="margin-top:26px;"><a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a><a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a></div>
+        <div class="hero-badges">{chips.map((chip) => <span class="badge">{chip}</span>)}</div>
+        <div class="hero-meta">{metrics.map((item) => <div class="metric"><strong>{item.title}</strong><span>{item.desc}</span></div>)}</div>
+      </div>
+      <div class="panel hero-stage"><div class="hero-stage-inner"><div class="pill">Industrial Platform</div><h2 class="h2" style="margin-top:16px;font-size:1.95rem;">{titleRight}</h2><p class="muted" style="margin-top:12px;line-height:1.8;">模型上传、工程评估、工艺建议、试制交付与项目协同，统一进一个入口。</p><div class="hero-chip-grid"><div class="chip"><b>Upload</b><span>STEP / STL / PDF</span></div><div class="chip"><b>DFM</b><span>结构、装配、工艺风险</span></div><div class="chip"><b>Quote</b><span>区间报价 + 建议路径</span></div><div class="chip"><b>Delivery</b><span>试制、后处理、交付</span></div></div><div style="margin-top:18px;" class="card"><div class="small">建议提交内容</div><ul class="list-check" style="margin-top:8px;"><li>产品目的、关键尺寸、公差要求</li><li>材料方向、数量、交期、表面要求</li><li>验证目标：功能 / 装配 / 外观 / 试制</li></ul></div></div></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const layers = [["Upload Layer", "STEP / STL / PDF / brief"], ["Engineering Layer", "DFM review and process advice"], ["Pricing Layer", "Quote range and lead time"], ["Delivery Layer", "Production, finishing and shipment"]];
+---
+<BaseLayout title="Platform | VANMEE" description="Platform connects upload, engineering review, quotation and delivery.">
+  <section class="section"><div class="container"><SectionTitle kicker="Platform" title="Manufacturing coordination platform" subtitle="Connect upload, review, quote and delivery in one path." /><div class="timeline">{layers.map((i, idx) => (<article class="timeline-item"><span class="pill">0{idx + 1}</span><strong>{i[0]}</strong><p>{i[1]}</p></article>))}</div></div></section>
+</BaseLayout>

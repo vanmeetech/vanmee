@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+const rows = [
+  ["产品工程验证", "将结构、装配、功能和工艺风险前置判断。"],
+  ["试制导入", "支持单件验证、小批量试产与试制转产。"],
+  ["制造协同", "整合设计、制造、后处理、装配和外协资源。"],
+  ["项目管理", "拆解需求、跟踪进度、推进交付。"],
+];
+---
+<BaseLayout title="解决方案 | VANMEE 凡觅" description="围绕量产前的工程验证、试制交付与制造协同展开。">
+  <section class="section"><div class="container"><SectionTitle kicker="Solutions" title="解决方案" subtitle="围绕量产前的工程验证、试制交付与制造协同展开。" /><div class="grid-3">{rows.map((r) => (<article class="card"><h3 class="h3">{r[0]}</h3><p class="muted">{r[1]}</p></article>))}</div><div style="margin-top:26px;" class="panel"><div style="padding:22px;"><div class="btn-row"><a class="btn btn-primary" href="/quote">获取报价</a><a class="btn btn-secondary" href="/upload">上传文件</a></div></div></div></div></section>
+</BaseLayout>
