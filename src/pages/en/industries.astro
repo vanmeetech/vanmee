@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const industries = [["Automation", "Brackets, mechanisms, enclosures and validation models."], ["Robotics", "Shells, frames, mounts and assembly verification parts."], ["Energy Equipment", "Structural trials, functional parts and process coordination."], ["Medical Devices", "Projects with high demands on precision and validation cadence."], ["Automotive", "Trial validation, fit verification and sample progression."], ["Research", "Experimental rigs, validation models and hardware R&D."]];
+---
+<BaseLayout title="Industries | VANMEE" description="Industry solutions cover automation, robotics, energy equipment, medical devices, automotive and research institutions.">
+  <section class="section"><div class="container"><SectionTitle kicker="Industries" title="Industry solutions" subtitle="The common thread is validation efficiency and delivery reliability." /><div class="grid-3">{industries.map((i) => (<article class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div></div></section>
+</BaseLayout>

@@ -1,0 +1,410 @@
+---
+const { rfq, locale } = Astro.props;
+const isZh = locale === 'zh';
+---
+<section class="section-anchor border-b border-line/70 bg-mist py-20" id="rfq">
+  <div class="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-[0.16em] text-slateblue">{rfq.eyebrow}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">{rfq.title}</h2>
+        <p class="mt-5 text-base leading-8 text-slateblue">{rfq.description}</p>
+        <div class="mt-8 space-y-4">
+          {rfq.info.map((item) => (
+            <div class="rounded-2xl border border-line bg-white p-5">
+              <p class="text-sm font-medium text-navy">{item.title}</p>
+              <p class="mt-2 text-sm leading-7 text-slateblue">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="rounded-[28px] border border-line bg-white p-6 shadow-soft sm:p-8">
+        <form id={`rfqForm-${locale}`} class="space-y-6" novalidate data-locale={locale}>
+          <div class="grid gap-6 md:grid-cols-2">
+            <div>
+              <label for={`productType-${locale}`} class="mb-2 block text-sm font-medium text-ink">{rfq.form.productType}</label>
+              <select
+                id={`productType-${locale}`}
+                name="productType"
+                class="w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-navy"
+                required
+              >
+                <option value="">{isZh ? '请选择' : 'Please select'}</option>
+                {rfq.form.productOptions.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for={`processType-${locale}`} class="mb-2 block text-sm font-medium text-ink">{rfq.form.processType}</label>
+              <select
+                id={`processType-${locale}`}
+                name="processType"
+                class="w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-navy"
+                required
+              >
+                <option value="">{isZh ? '请选择' : 'Please select'}</option>
+                {rfq.form.processOptions.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for={`quantity-${locale}`} class="mb-2 block text-sm font-medium text-ink">{rfq.form.quantity}</label>
+            <input
+              id={`quantity-${locale}`}
+              name="quantity"
+              type="number"
+              min="1"
+              step="1"
+              placeholder={rfq.form.quantityPlaceholder}
+              class="w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-navy"
+              required
+            />
+          </div>
+          <div>
+            <label for={`description-${locale}`} class="mb-2 block text-sm font-medium text-ink">{rfq.form.description}</label>
+            <textarea
+              id={`description-${locale}`}
+              name="description"
+              rows="6"
+              placeholder={rfq.form.descriptionPlaceholder}
+              class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-sm leading-7 text-ink outline-none transition focus:border-navy"
+              required
+            ></textarea>
+          </div>
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm leading-7 text-slateblue">{rfq.form.helper}</p>
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:bg-ink"
+            >
+              {rfq.form.button}
+            </button>
+          </div>
+          <p id={`formError-${locale}`} class="hidden rounded-2xl border border-danger/20 bg-red-50 px-4 py-3 text-sm text-danger"></p>
+        </form>
+        <div
+          id={`rfqResult-${locale}`}
+          class="mt-8 hidden rounded-[28px] border border-line bg-mist p-6 sm:p-8"
+          aria-live="polite"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script define:vars={{ locale, rfq }}>
+  const form = document.getElementById(`rfqForm-${locale}`);
+  const result = document.getElementById(`rfqResult-${locale}`);
+  const formError = document.getElementById(`formError-${locale}`);
+  const localeMode = locale;
+  const labels = rfq.result.labels;
+  const resultTitle = rfq.result.title;
+  const resultEyebrow = rfq.result.eyebrow;
+  const resultBadge = rfq.result.badge;
+  function containsAny(text, keywords) {
+    return keywords.some((keyword) => text.includes(keyword));
+  }
+  function getComplexityLabel(score) {
+    if (score >= 76) return 'A';
+    if (score >= 46) return 'B';
+    return 'C';
+  }
+  function getRiskLabel(score) {
+    if (localeMode === 'zh') {
+      if (score >= 72) return '高';
+      if (score >= 42) return '中';
+      return '低';
+    }
+    if (score >= 72) return 'High';
+    if (score >= 42) return 'Medium';
+    return 'Low';
+  }
+  function getResponseTime(level, risk) {
+    if (localeMode === 'zh') {
+      if (level === 'A' || risk === '高') return '预计 2 小时内进入初步工程响应';
+      if (level === 'B' || risk === '中') return '预计 4 小时内进入初步工程响应';
+      return '预计 1 个工作日内进入初步工程响应';
+    }
+    if (level === 'A' || risk === 'High') return 'Expected to enter initial engineering response within 2 hours';
+    if (level === 'B' || risk === 'Medium') return 'Expected to enter initial engineering response within 4 hours';
+    return 'Expected to enter initial engineering response within 1 business day';
+  }
+  function getKeywords() {
+    if (localeMode === 'zh') {
+      return {
+        assembly: ['装配', '组装', '接口', '配合'],
+        precision: ['公差', '精度', '精密', '定位'],
+        surface: ['表面', '外观', '喷涂', '阳极', '处理'],
+        validation: ['验证', '测试', '试验', '功能'],
+        multi: ['多工艺', '组合', '协同', '混合'],
+        lowVolume: ['小批量', '试制', '导入']
+      };
+    }
+    return {
+      assembly: ['assembly', 'fit', 'interface', 'mounting'],
+      precision: ['tolerance', 'precision', 'accurate', 'alignment'],
+      surface: ['surface', 'finish', 'coating', 'anodizing', 'appearance'],
+      validation: ['validation', 'test', 'testing', 'function', 'functional'],
+      multi: ['multi-process', 'combined', 'coordination', 'hybrid'],
+      lowVolume: ['low-volume', 'pilot', 'trial build', 'introduction']
+    };
+  }
+  function getPathSuggestion(productType, processType, desc, quantity, risk) {
+    const keys = getKeywords();
+    const hasAssembly = containsAny(desc, keys.assembly);
+    const hasPrecision = containsAny(desc, keys.precision);
+    const hasSurface = containsAny(desc, keys.surface);
+    const hasValidation = containsAny(desc, keys.validation);
+    const isBatch = quantity >= 20;
+    if (localeMode === 'zh') {
+      if (productType === '验证模型') {
+        if (processType === '3D打印') {
+          return hasValidation
+            ? '建议优先采用 3D打印 + 功能验证路径，先快速确认结构与验证目标。'
+            : '建议优先采用 3D打印路径，先完成外形与结构初判，再决定是否转入更高精度工艺。';
+        }
+        if (processType === 'CNC') {
+          return '建议采用 CNC 验证路径，重点确认关键尺寸、装配关系与结构稳定性。';
+        }
+        return '建议采用验证模型 + 钣金结构判断路径，先确认装配界面与实际结构关系。';
+      }
+      if (productType === '装配件' || hasAssembly) {
+        if (processType === 'CNC') {
+          return '建议优先采用 CNC + 装配验证路径，先聚焦接口、公差与装配顺序。';
+        }
+        if (processType === '钣金') {
+          return '建议优先采用 钣金 + 装配验证路径，提前确认折弯、连接和安装界面。';
+        }
+        return '建议优先采用 3D打印 + 装配预演路径，快速排查装配逻辑，再决定关键件工艺。';
+      }
+      if (processType === '钣金') {
+        if (hasSurface || isBatch) {
+          return '建议采用 钣金 + 表面处理 + 小批量试制路径，更适合导入前评估。';
+        }
+        return '建议采用 钣金结构验证路径，先确认成形、接口与安装条件。';
+      }
+      if (processType === 'CNC') {
+        if (hasPrecision) {
+          return '建议采用 CNC 精度验证路径，优先明确关键尺寸、公差与配合关系。';
+        }
+        return '建议采用 CNC 结构验证路径，先完成关键零件与真实装配关系判断。';
+      }
+      if (processType === '3D打印') {
+        if (risk === '高') {
+          return '建议先以 3D打印完成快速验证，再把高风险部位转入更稳定的结构工艺确认。';
+        }
+        return '建议采用 3D打印快速迭代路径，优先验证假设并缩短前期判断周期。';
+      }
+      return '建议先进行结构与工艺联合评估，再确定更合适的验证与试制路径。';
+    }
+    if (productType === 'Validation model') {
+      if (processType === '3D Printing') {
+        return hasValidation
+          ? 'A 3D printing + functional validation path is recommended first to confirm structure and validation intent quickly.'
+          : 'A 3D printing path is recommended first to verify form and structural direction before moving into higher-precision processes.';
+      }
+      if (processType === 'CNC') {
+        return 'A CNC validation path is recommended to confirm key dimensions, fit relationships and structural stability.';
+      }
+      return 'A validation model + sheet metal review path is recommended to confirm interface logic and real structural relationships first.';
+    }
+    if (productType === 'Assembly' || hasAssembly) {
+      if (processType === 'CNC') {
+        return 'A CNC + assembly validation path is recommended, with priority on interfaces, tolerances and assembly sequence.';
+      }
+      if (processType === 'Sheet Metal') {
+        return 'A sheet metal + assembly validation path is recommended to confirm bending, joining and installation interfaces earlier.';
+      }
+      return 'A 3D printing + assembly rehearsal path is recommended first to expose assembly logic before defining critical-part processes.';
+    }
+    if (processType === 'Sheet Metal') {
+      if (hasSurface || isBatch) {
+        return 'A sheet metal + surface finishing + low-volume build path is recommended, especially for pre-launch review.';
+      }
+      return 'A sheet metal structural validation path is recommended to confirm forming, interfaces and installation conditions first.';
+    }
+    if (processType === 'CNC') {
+      if (hasPrecision) {
+        return 'A CNC precision validation path is recommended, with early clarification of key tolerances and fit-critical zones.';
+      }
+      return 'A CNC structural validation path is recommended to confirm critical parts and real assembly relationships first.';
+    }
+    if (processType === '3D Printing') {
+      if (risk === 'High') {
+        return 'Use 3D printing first for rapid validation, then move high-risk areas into a more stable structural process for confirmation.';
+      }
+      return 'A 3D printing iteration path is recommended to validate assumptions early and shorten the initial judgement cycle.';
+    }
+    return 'A joint structural and process assessment is recommended before selecting the next validation or pilot-build path.';
+  }
+  function buildSummary(level, risk, productType, processType, score, quantity, desc) {
+    const keys = getKeywords();
+    const hasAssembly = containsAny(desc, keys.assembly);
+    const hasPrecision = containsAny(desc, keys.precision);
+    const hasMultiProcess = containsAny(desc, keys.multi);
+    const hasValidation = containsAny(desc, keys.validation);
+    const notes = [];
+    if (localeMode === 'zh') {
+      if (level === 'A') {
+        notes.push('工程师已经开始评估你的项目。当前需求包含较高判断密度，适合进入结构与工艺联合评估。');
+      } else if (level === 'B') {
+        notes.push('工程师已经开始评估你的项目。当前需求具备明确推进基础，但仍需补足部分关键判断。');
+      } else {
+        notes.push('工程师已经开始评估你的项目。当前需求适合先完成基础验证判断，再进入下一步推进。');
+      }
+      if (productType === '装配件' || hasAssembly) {
+        notes.push('初步判断装配关系会对项目成败产生较大影响，建议优先梳理接口与安装顺序。');
+      }
+      if (hasPrecision) {
+        notes.push('描述中涉及精度或公差要求，建议尽早明确关键尺寸和优先验证部位。');
+      }
+      if (hasValidation) {
+        notes.push('当前需求已带有明确验证意图，适合围绕验证目标组织工艺路径，而不是直接进入泛化试制。');
+      }
+      if (hasMultiProcess || quantity >= 20) {
+        notes.push('项目存在多工艺协同或小批量推进倾向，建议在试制前先统一工艺边界和交付节奏。');
+      }
+      if (notes.length < 3) {
+        notes.push('当前信息已足够形成初步判断，若补充图纸、装配关系或阶段目标，后续沟通会更高效。');
+      }
+      return notes.slice(0, 4);
+    }
+    if (level === 'A') {
+      notes.push('An engineer has started reviewing your project. The current request carries a higher decision density and is better suited to joint structural and process review.');
+    } else if (level === 'B') {
+      notes.push('An engineer has started reviewing your project. The request has a workable foundation, but several key engineering decisions still need refinement.');
+    } else {
+      notes.push('An engineer has started reviewing your project. The request is suitable for a more basic validation pass before moving further.');
+    }
+    if (productType === 'Assembly' || hasAssembly) {
+      notes.push('Assembly logic is likely to have a strong impact on success, so interfaces and installation sequence should be clarified early.');
+    }
+    if (hasPrecision) {
+      notes.push('Tolerance or precision requirements appear in the description, so key dimensions and priority validation zones should be defined earlier.');
+    }
+    if (hasValidation) {
+      notes.push('The request already shows clear validation intent, which suggests building the process path around validation goals rather than moving directly into generic pilot work.');
+    }
+    if (hasMultiProcess || quantity >= 20) {
+      notes.push('The project shows signs of multi-process coordination or low-volume progression, so process boundaries and delivery rhythm should be aligned before pilot work.');
+    }
+    if (notes.length < 3) {
+      notes.push('The current information is enough for an initial view, and adding drawings, assembly relationships or stage objectives will improve the next discussion.');
+    }
+    return notes.slice(0, 4);
+  }
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    formError.classList.add('hidden');
+    formError.textContent = '';
+    const productType = document.getElementById(`productType-${locale}`)?.value.trim();
+    const processType = document.getElementById(`processType-${locale}`)?.value.trim();
+    const quantityValue = document.getElementById(`quantity-${locale}`)?.value.trim();
+    const description = document.getElementById(`description-${locale}`)?.value.trim();
+    if (!productType || !processType || !quantityValue || !description) {
+      formError.textContent = rfq.errors.required;
+      formError.classList.remove('hidden');
+      return;
+    }
+    const quantity = Number(quantityValue);
+    if (!Number.isFinite(quantity) || quantity < 1) {
+      formError.textContent = rfq.errors.quantity;
+      formError.classList.remove('hidden');
+      return;
+    }
+    if (description.length < 18) {
+      formError.textContent = rfq.errors.description;
+      formError.classList.remove('hidden');
+      return;
+    }
+    const desc = description.toLowerCase();
+    const keys = getKeywords();
+    let score = 18;
+    if (localeMode === 'zh') {
+      if (productType === '装配件') score += 24;
+      if (productType === '结构件') score += 16;
+      if (productType === '验证模型') score += 10;
+      if (processType === 'CNC') score += 18;
+      if (processType === '钣金') score += 15;
+      if (processType === '3D打印') score += 10;
+    } else {
+      if (productType === 'Assembly') score += 24;
+      if (productType === 'Structural part') score += 16;
+      if (productType === 'Validation model') score += 10;
+      if (processType === 'CNC') score += 18;
+      if (processType === 'Sheet Metal') score += 15;
+      if (processType === '3D Printing') score += 10;
+    }
+    if (quantity >= 1 && quantity <= 3) score += 6;
+    if (quantity >= 4 && quantity <= 20) score += 12;
+    if (quantity > 20) score += 20;
+    if (description.length >= 40) score += 8;
+    if (description.length >= 80) score += 10;
+    if (containsAny(desc, keys.assembly)) score += 14;
+    if (containsAny(desc, keys.precision)) score += 12;
+    if (containsAny(desc, keys.validation)) score += 10;
+    if (containsAny(desc, keys.surface)) score += 7;
+    if (containsAny(desc, keys.multi)) score += 9;
+    if (containsAny(desc, keys.lowVolume)) score += 8;
+    score = Math.max(1, Math.min(100, score));
+    const level = getComplexityLabel(score);
+    const risk = getRiskLabel(score);
+    const responseTime = getResponseTime(level, risk);
+    const pathSuggestion = getPathSuggestion(productType, processType, desc, quantity, risk);
+    const summaryList = buildSummary(level, risk, productType, processType, score, quantity, desc);
+    result.classList.remove('hidden');
+    result.classList.add('result-enter');
+    const riskColor =
+      localeMode === 'zh'
+        ? risk === '高'
+          ? 'text-danger border-danger/20 bg-red-50'
+          : risk === '中'
+            ? 'text-warning border-warning/20 bg-orange-50'
+            : 'text-success border-success/20 bg-green-50'
+        : risk === 'High'
+          ? 'text-danger border-danger/20 bg-red-50'
+          : risk === 'Medium'
+            ? 'text-warning border-warning/20 bg-orange-50'
+            : 'text-success border-success/20 bg-green-50';
+    result.innerHTML = `
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-4 border-b border-line pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-[0.16em] text-slateblue">${resultEyebrow}</p>
+            <h3 class="mt-3 text-2xl font-semibold text-navy">${resultTitle}</h3>
+          </div>
+          <span class="inline-flex w-fit items-center rounded-full border border-success/20 bg-green-50 px-4 py-2 text-sm font-medium text-success">
+            ${resultBadge}
+          </span>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div class="rounded-2xl border border-line bg-white p-5">
+            <p class="text-sm text-slateblue">${labels.level}</p>
+            <p class="mt-3 text-3xl font-semibold text-navy">${level}</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-white p-5">
+            <p class="text-sm text-slateblue">${labels.score}</p>
+            <p class="mt-3 text-3xl font-semibold text-navy">${score}</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-white p-5">
+            <p class="text-sm text-slateblue">${labels.risk}</p>
+            <p class="mt-3 inline-flex rounded-full border px-3 py-1 text-sm font-medium ${riskColor}">${risk}</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-white p-5 xl:col-span-2">
+            <p class="text-sm text-slateblue">${labels.response}</p>
+            <p class="mt-3 text-base font-medium leading-7 text-navy">${responseTime}</p>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-line bg-white p-6">
+          <p class="text-sm font-medium text-navy">${labels.path}</p>
+          <p class="mt-3 text-sm leading-7 text-slateblue">${pathSuggestion}</p>
+        </div>
+        <div class="rounded-3xl border border-line bg-white p-6">
+          <p class="text-sm font-medium text-navy">${labels.summary}</p>
+          <ul class="mt-4 space-y-3 text-sm leading-7 text-slateblue">
+            ${summaryList.map((item) => `<li>- ${item}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

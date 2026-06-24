@@ -1,0 +1,32 @@
+---
+const { validation } = Astro.props;
+---
+<section class="section-anchor border-b border-line/70 bg-white py-20" id="validation">
+  <div class="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium uppercase tracking-[0.16em] text-slateblue">{validation.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl">{validation.title}</h2>
+      <p class="mt-5 text-base leading-8 text-slateblue">{validation.description}</p>
+    </div>
+    <div class="mt-12 grid gap-6 lg:grid-cols-5">
+      {validation.items.map((item) => (
+        <article class="rounded-3xl border border-line bg-mist p-6">
+          <span class="text-xs font-medium uppercase tracking-[0.16em] text-slateblue">{item.code}</span>
+          <h3 class="mt-3 text-lg font-semibold text-navy">{item.title}</h3>
+          <p class="mt-3 text-sm leading-7 text-slateblue">{item.text}</p>
+        </article>
+      ))}
+    </div>
+    <div class="mt-10 rounded-[28px] border border-line bg-navy p-8 text-white shadow-soft">
+      <div class="grid gap-6 lg:grid-cols-3">
+        {validation.values.map((item, index) => (
+          <div>
+            <p class="text-sm uppercase tracking-[0.16em] text-white/70">Value 0{index + 1}</p>
+            <h3 class="mt-3 text-xl font-semibold">{item.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-white/85">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

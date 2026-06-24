@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroTech from "../components/common/HeroTech.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+import Stats from "../components/common/Stats.astro";
+
+const metrics = [
+  { title: "2005+", desc: "工业工程业务起点" },
+  { title: "2015+", desc: "增材制造技术积累" },
+  { title: "24h", desc: "工程响应周期" },
+  { title: "1000+", desc: "项目协同交付经验" }
+];
+
+const capabilities = [
+  { title: "工程验证", desc: "围绕结构、装配、功能与制造可行性进行前置评估与风险识别。", tag: "EVT工程验证 / DVT设计验证 / PVT量产验证" },
+  { title: "试制交付", desc: "支持工业样机、小批量试制与工程验证样件生产与交付。", tag: "样机 / 试制生产" },
+  { title: "制造协同", desc: "整合3D打印、CNC加工、钣金与表面处理，实现一体化交付。", tag: "多工艺协同制造" }
+];
+
+const workflow = [
+  { step: "01", title: "提交需求", text: "上传模型或说明资料，明确用途、材料、交期与验证目标。" },
+  { step: "02", title: "工程评估", text: "分析壁厚、装配关系、公差控制、结构强度及制造风险。" },
+  { step: "03", title: "工艺方案与报价", text: "提供加工方式建议、制作方案对比、报价区间及交付周期。" },
+  { step: "04", title: "试制生产与交付", text: "完成加工制作、后处理、装配、检验与最终交付。" }
+];
+
+const industries = [
+  "自动化设备",
+  "机器人",
+  "新能源装备",
+  "医疗设备",
+  "汽车零部件",
+  "科研院所"
+];
+
+const cases = [
+  {
+    title: "机器人外壳验证项目",
+    meta: "2200mm / 12天交付",
+    desc: "通过分件设计与装配验证，实现结构与外观同步确认。"
+  },
+  {
+    title: "自动化设备样机",
+    meta: "用于客户验收",
+    desc: "用于客户评审与内部验证，加快决策与交付周期。"
+  },
+  {
+    title: "新能源储能设备展示模型",
+    meta: "多工艺协同",
+    desc: "整合3D打印、喷涂与装配，实现展示级整体交付。"
+  }
+];
+
+const stats = [
+  { title: "SLA / SLS / SLM/FDM/FGF", desc: "增材制造工艺体系" },
+  { title: "CNC / 钣金 / 装配", desc: "结构件与零部件加工交付" },
+  { title: "项目整合", desc: "统一对接与项目管理" },
+  { title: "工程判断", desc: "前置制造可行性评估" }
+];
+---
+
+<BaseLayout title="VANMEE 凡觅 | 产品工程验证与智造协同服务" description="VANMEE 凡觅专注于产品量产前的工程验证、试制生产与智造协同服务。">
+
+  <HeroTech
+    kicker="VANMEE 凡觅"
+    title="产品量产前工程验证与试制交付"
+    subtitle="专注产品量产前的工程验证、试制生产与智造协同，让产品更快完成落地。"
+    primaryHref="/upload"
+    primaryLabel="上传文件"
+    secondaryHref="/quote"
+    secondaryLabel="获取报价"
+    metrics={metrics}
+    chips={["STEP / STL", "工程评估", "试制生产", "制造协同"]}
+    titleRight="工程验证与智造协同系统"
+  />
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="核心价值"
+        title="我们是产品工程验证与智造协同系统"
+        subtitle="把工程问题提前判断，把制造方案提前确定，把交付流程压缩到最短"
+      />
+      <div class="grid-3">
+        {capabilities.map((c) => (
+          <article class="card">
+            <div class="pill">{c.tag}</div>
+            <h3 class="h3" style="margin-top:14px;">{c.title}</h3>
+            <p class="muted">{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="服务流程"
+        title="从需求到交付，每一步更清晰、更可执行"
+        subtitle="这是项目推进流程，而不是展示内容"
+      />
+      <div class="timeline">
+        {workflow.map((item) => (
+          <article class="timeline-item">
+            <span class="pill">{item.step}</span>
+            <strong>{item.title}</strong>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="行业应用"
+        title="服务行业场景"
+        subtitle="面向产品开发、试制验证与工程交付场景"
+      />
+      <div class="grid-3">
+        {industries.map((item) => (
+          <div class="card" style="padding:18px 20px;">
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="项目案例"
+        title="案例不是展示，而是工程交付结果"
+        subtitle="重点说明问题、解决方式与交付结果"
+      />
+      <div class="grid-3">
+        {cases.map((item) => (
+          <article class="card">
+            <div class="badge" style="margin-bottom:12px;">{item.meta}</div>
+            <h3 class="h3">{item.title}</h3>
+            <p class="muted">{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="智造能力"
+        title="智造与交付能力体系"
+        subtitle="围绕样机、结构件与试制交付构建能力矩阵"
+      />
+      <Stats items={stats} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="panel" style="padding:26px;">
+        <div class="grid-2" style="align-items:center;">
+          <div>
+            <div class="kicker">RFQ</div>
+            <h2 class="h2">上传文件，获取工程评估与报价方案</h2>
+            <p class="lead">
+              支持 STEP、STL、PDF、草图及项目说明。我们将根据用途、结构、材料、交期与风险点，给出制造方案与报价建议。
+            </p>
+          </div>
+          <div style="justify-self:end;">
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/upload">上传文件</a>
+              <a class="btn btn-secondary" href="/contact">联系凡觅</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

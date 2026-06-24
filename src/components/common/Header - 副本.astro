@@ -1,0 +1,24 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+const pathname = Astro.url.pathname;
+const isEn = /^\/en(\/|$)/.test(pathname);
+const nav = isEn
+  ? [ { href: "/en/solutions", label: "Solutions" }, { href: "/en/capabilities", label: "Capabilities" }, { href: "/en/validation", label: "Validation" }, { href: "/en/case-studies", label: "Cases" }, { href: "/en/quote", label: "Quote" }, { href: "/en/contact", label: "Contact" } ]
+  : [ { href: "/solutions", label: "解决方案" }, { href: "/capabilities", label: "制造能力" }, { href: "/validation", label: "验证体系" }, { href: "/case-studies", label: "案例" }, { href: "/quote", label: "报价" }, { href: "/contact", label: "联系" } ];
+const quoteHref = isEn ? "/en/quote" : "/quote";
+const homeHref = isEn ? "/en/" : "/";
+const cta = isEn ? "Get Quote" : "获取报价";
+---
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a class="brand" href={homeHref} aria-label="VANMEE home">
+      <img src="./logo.png" alt="VANMEE 凡觅" class="h-9 w-auto" />  <span class="flex flex-col">
+      <span class="brand-text"><span>VANMEE</span><small>{isEn ? "Engineering Validation" : "产品工程验证与智造服务商"}</small></span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">{nav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+    <div class="nav-right">
+      <LanguageSwitcher />
+      <a class="btn btn-primary" href={quoteHref}>{cta}</a>
+    </div>
+  </div>
+</header>

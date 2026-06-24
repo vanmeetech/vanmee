@@ -1,0 +1,62 @@
+---
+const pathname = Astro.url.pathname;
+const isEn = /^\/en(\/|$)/.test(pathname);
+---
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <!-- COLUMN 1: BRAND -->
+     <div class="footer-brand">
+  <a class="brand" href="/">
+    <img src="/logo.png" alt="VANMEE" class="logo" />
+  </a>
+
+  <div class="brand-slogan">
+    <p class="muted">  让创新产品更快落地</p>
+  </div>
+
+  <p class="small">
+    凡觅（江西）工业有限公司<br />
+    南昌高新开发区火炬大街89号<br />
+    0791-8811 1566
+  </p>
+</div>
+
+      <!-- COLUMN 2: NAVIGATION -->
+      <div>
+        <h4>{isEn ? "Navigation" : "导航"}</h4>
+        <ul class="list-check">
+          <li><a href={isEn ? "/en/" : "/"}>{isEn ? "Home" : "首页"}</a></li>
+          <li><a href={isEn ? "/en/solutions" : "/solutions"}>{isEn ? "Solutions" : "解决方案"}</a></li>
+          <li><a href={isEn ? "/en/capabilities" : "/capabilities"}>{isEn ? "Capabilities" : "制造能力"}</a></li>
+          <li><a href={isEn ? "/en/case-studies" : "/case-studies"}>{isEn ? "Cases" : "案例"}</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 3: SERVICES -->
+      <div>
+        <h4>{isEn ? "Services" : "核心服务"}</h4>
+        <ul class="list-check">
+          <li>{isEn ? "Engineering validation" : "工程验证"}</li>
+          <li>{isEn ? "Prototype delivery" : "试制交付"}</li>
+          <li>{isEn ? "Manufacturing coordination" : "制造协同"}</li>
+          <li>{isEn ? "Supply chain integration" : "供应链整合"}</li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 4: CONTACT -->
+      <div>
+        <h4>{isEn ? "Contact" : "联系"}</h4>
+        <p class="small">
+          www.vanmee.cn<br />
+          support@vanmee.cn
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</footer>

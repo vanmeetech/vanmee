@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+const cases = [["机器人外壳验证项目", "2200mm / 12天交付", "通过分件验证与装配协同，完成结构与外观联调。"], ["自动化设备样机", "用于客户验收", "以样机加速客户验证和内部评审流程。"], ["医疗设备验证模型", "高精度验证", "围绕功能、装配和外观进行验证。"], ["新能源储能设备展示模型", "多工艺协同", "整合打印、喷涂和装配，完成展示级交付。"], ["工业机器人展示模型", "高质感外观", "适合展会、招商和发布会场景。"], ["科研设备开发验证", "研发前置", "用于工程验证与设计评审。"]];
+---
+<BaseLayout title="案例中心 | VANMEE 凡觅" description="案例覆盖机器人、自动化设备、医疗设备、新能源、工业展示与科研设备。">
+  <section class="section"><div class="container"><SectionTitle kicker="Cases" title="案例中心" subtitle="案例不是展示，而是工程判断逻辑的证明。" /><div class="grid-3">{cases.map((i) => (<article class="card"><div class="badge" style="margin-bottom:12px;">{i[1]}</div><h3 class="h3">{i[0]}</h3><p class="muted">{i[2]}</p></article>))}</div></div></section>
+</BaseLayout>

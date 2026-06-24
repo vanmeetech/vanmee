@@ -1,0 +1,35 @@
+---
+const { title = "VANMEE Engineering" } = Astro.props;
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="logo">VANMEE</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/cases">Cases</a>
+    <a href="/quote">Quote</a>
+    <a href="/upload">Upload CAD</a>
+  </nav>
+</header>
+
+<main>
+  <slot />
+</main>
+
+<footer class="footer">
+  <p>Engineering Validation & Manufacturing Systems</p>
+</footer>
+
+</body>
+</html>

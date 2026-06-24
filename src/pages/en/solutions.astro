@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const rows = [
+  ["Product Engineering Validation", "Bring engineering risk forward and uncover structure, assembly, process and cost issues."],
+  ["Prototype Introduction", "Support single-piece validation, low-volume pilot runs and prototype-to-production transition."],
+  ["Manufacturing Coordination", "Integrate design, manufacturing, finishing, assembly and outsourcing resources."],
+  ["Project Management", "Project breakdown, tracking, milestone coordination and delivery control."],
+];
+---
+<BaseLayout title="Solutions | VANMEE" description="Centered on pre-production engineering validation, prototype delivery and manufacturing coordination.">
+  <section class="section"><div class="container"><SectionTitle kicker="Solutions" title="Solutions" subtitle="Centered on pre-production engineering validation, prototype delivery and manufacturing coordination." /><div class="grid-3">{rows.map((r) => (<article class="card"><h3 class="h3">{r[0]}</h3><p class="muted">{r[1]}</p></article>))}</div><div style="margin-top:26px;" class="panel"><div style="padding:22px;"><div class="btn-row"><a class="btn btn-primary" href="/en/quote">Get Quote</a><a class="btn btn-secondary" href="/en/upload">Upload Files</a></div></div></div></div></section>
+</BaseLayout>

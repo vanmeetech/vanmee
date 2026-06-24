@@ -1,0 +1,89 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+}
+interface Props {
+  homeLabel: string;
+  brandLine: string;
+  nav: NavItem[];
+  switchLabel: string;
+  switchHref: string;
+  switchLang: string;
+  cta: string;
+}
+const { homeLabel, brandLine, nav, switchLabel, switchHref, switchLang, cta } = Astro.props;
+---
+<header class="sticky top-0 z-50 border-b border-line/80 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-8xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <a href="#top" class="flex items-center gap-3" aria-label={homeLabel}>
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-sm font-semibold tracking-[0.16em] text-white">VM</span>
+      <span class="flex flex-col">
+        <span class="text-sm font-semibold tracking-[0.18em] text-navy">VANMEE</span>
+        <span class="text-xs text-slateblue">{brandLine}</span>
+      </span>
+    </a>
+    <div class="hidden items-center gap-8 lg:flex">
+      <nav aria-label="Primary navigation">
+        <ul class="flex items-center gap-6 text-sm text-ink">
+          {nav.map((item) => (
+            <li><a class="transition hover:text-navy" href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a
+          href={switchHref}
+          class="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-ink transition hover:border-slateblue hover:text-navy"
+          lang={switchLang}
+          hreflang={switchLang}
+        >
+          {switchLabel}
+        </a>
+        <a
+          href="#rfq"
+          class="inline-flex items-center rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-white transition hover:bg-ink"
+        >
+          {cta}
+        </a>
+      </div>
+    </div>
+    <button
+      id="menuToggle"
+      type="button"
+      class="inline-flex items-center justify-center rounded-lg border border-line p-2 text-navy lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+      aria-label="Toggle menu"
+    >
+      <svg xmlns="[w3.org](http://www.w3.org/2000/svg)" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden border-t border-line bg-white lg:hidden">
+    <nav class="mx-auto max-w-8xl px-4 py-4 sm:px-6" aria-label="Mobile navigation">
+      <ul class="space-y-3 text-sm text-ink">
+        {nav.map((item) => (
+          <li><a class="block rounded-lg px-3 py-2 hover:bg-mist" href={item.href}>{item.label}</a></li>
+        ))}
+        <li class="flex items-center gap-3 px-3 pt-2">
+          <a
+            href={switchHref}
+            class="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-ink"
+            lang={switchLang}
+            hreflang={switchLang}
+          >
+            {switchLabel}
+          </a>
+          <a
+            href="#rfq"
+            class="inline-flex items-center rounded-full bg-navy px-4 py-2 text-sm font-medium text-white"
+          >
+            {cta}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

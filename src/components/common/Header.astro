@@ -1,0 +1,219 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const pathname = Astro.url.pathname;
+const isEn = /^\/en(\/|$)/.test(pathname);
+
+const nav = isEn
+  ? [
+      { href: "/en/solutions", label: "Solutions" },
+      { href: "/en/capabilities", label: "Capabilities" },
+      { href: "/en/validation", label: "Validation" },
+      { href: "/en/case-studies", label: "Cases" },
+      { href: "/en/quote", label: "Quote" },
+      { href: "/en/contact", label: "Contact" }
+    ]
+  : [
+      { href: "/solutions", label: "解决方案" },
+      { href: "/capabilities", label: "制造能力" },
+      { href: "/validation", label: "验证体系" },
+      { href: "/case-studies", label: "案例" },
+      { href: "/quote", label: "报价" },
+      { href: "/contact", label: "联系" }
+    ];
+
+const quoteHref = isEn ? "/en/quote" : "/quote";
+const homeHref = isEn ? "/en" : "/";
+const cta = isEn ? "Get Quote" : "获取报价";
+---
+
+<header class="navbar" id="navbar">
+  <div class="container navbar-inner">
+
+    <!-- BRAND -->
+    <a class="brand" href={homeHref}>
+      <img src="/logo.png" alt="VANMEE" class="logo" />
+
+      <div class="brand-text">
+        <div class="title">VANMEE</div>
+        <div class="sub">
+          {isEn ? "Engineering Validation Platform" : "产品工程验证与智造服务商"}
+        </div>
+      </div>
+    </a>
+
+    <!-- NAV -->
+    <nav class="nav">
+      {nav.map((item) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
+      ))}
+    </nav>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <LanguageSwitcher />
+      <a class="cta" href={quoteHref}>{cta}</a>
+    </div>
+
+  </div>
+</header>
+
+<style>
+/* =========================
+   BASE HEADER SYSTEM
+========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 12, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.25s ease;
+}
+
+/* scroll shrink effect */
+.navbar.shrink {
+  background: rgba(10, 10, 12, 0.92);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  min-width: 220px;
+}
+
+.logo {
+  height: 36px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar.shrink .logo {
+  height: 36px;
+}
+
+.brand-text .title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.brand-text .sub {
+  font-size: 11px;
+  color: #ffffff;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 13px;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* underline animation */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 1px;
+  background: #ffffff;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   RIGHT CTA
+========================= */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cta {
+  background: #ffffff;
+  color: #0a0a0c;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .brand-text .sub {
+    display: none;
+  }
+}
+</style>
+
+<script>
+/* scroll shrink behavior */
+const navbar = document.getElementById("navbar");
+
+if (navbar) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      navbar.classList.add("shrink");
+    } else {
+      navbar.classList.remove("shrink");
+    }
+  });
+}
+</script>

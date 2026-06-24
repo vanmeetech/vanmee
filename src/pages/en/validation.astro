@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+const items = [["DV Design Validation", "Check whether the concept matches the core design intent."], ["SV Structural Validation", "Review structure, load path and assembly assumptions."], ["AV Assembly Validation", "Focus on fit, sequence and interface consistency."], ["FV Functional Validation", "Link the structure to real use and prevent functional deviation."], ["DFM Manufacturability", "Identify manufacturing and assembly constraints before trial runs."]];
+const value = [["Find issues earlier", "Keep risk in validation, not in trial production."], ["Reduce rework", "Front-load engineering decisions to minimize iterations."], ["Improve success rate", "Make trial-production requirements more complete and clear."]];
+---
+<BaseLayout title="Validation | VANMEE" description="Validation covers DV, SV, AV, FV and DFM to find issues earlier and reduce rework.">
+  <section class="section"><div class="container"><SectionTitle kicker="Validation" title="Validation framework" subtitle="The value of validation is to find issues earlier and reduce rework." /><div class="grid-5">{items.map((i) => (<article class="card"><div class="pill" style="margin-bottom:12px;">{i[0].split(" ")[0]}</div><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></article>))}</div><div style="margin-top:26px;" class="panel"><div style="padding:26px;"><div class="grid-3">{value.map((i) => (<div class="card"><h3 class="h3">{i[0]}</h3><p class="muted">{i[1]}</p></div>))}</div></div></div></div></section>
+</BaseLayout>

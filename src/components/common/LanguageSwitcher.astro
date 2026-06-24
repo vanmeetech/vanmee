@@ -1,0 +1,11 @@
+---
+const pathname = Astro.url.pathname;
+const isEn = /^\/en(\/|$)/.test(pathname);
+const enPath = pathname === "/" ? "/en/" : isEn ? pathname : `/en${pathname}`;
+const zhPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
+---
+<div class="lang" aria-label="Language switcher">
+  <a href={zhPath} class={!isEn ? "active" : ""}>中文</a>
+  <span class="small">|</span>
+  <a href={enPath} class={isEn ? "active" : ""}>EN</a>
+</div>
