@@ -1,7 +1,182 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionTitle from "../components/common/SectionTitle.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/common/SectionTitle.astro";
+
+const processHints = [
+  {
+    title: "结构检查",
+    desc: "壁厚 / 结构强度 / 装配可行性"
+  },
+  {
+    title: "工艺推荐",
+    desc: "3D打印 / CNC / 钣金 / 复模选择"
+  },
+  {
+    title: "风险识别",
+    desc: "结构风险 / 公差风险 / 装配风险"
+  },
+  {
+    title: "成本评估",
+    desc: "基于工艺路径的区间报价模型"
+  }
+];
+
+const exampleInputs = [
+  "机器人外壳 / ABS / 1200mm / 需装配",
+  "医疗设备外壳 / 高精度 / 表面处理要求",
+  "储能设备模块 / 多零件 / 小批试制"
+];
 ---
-<BaseLayout title="上传文件 | VANMEE 凡觅" description="上传 STEP、STL、PDF 文件，获取工程评估。">
-  <section class="section"><div class="container"><SectionTitle kicker="Upload" title="上传文件" subtitle="支持 STEP、STL、PDF 与需求说明。用于进入工程预评估。" /><div class="content-grid"><div class="panel" style="padding:24px;"><form class="form"><div class="field"><label>文件上传</label><input class="input" type="file" /></div><div class="field"><label>项目类型</label><select class="select"><option>验证模型</option><option>结构件</option><option>装配件</option><option>试制项目</option></select></div><div class="field"><label>简要描述</label><textarea class="textarea" placeholder="材料、数量、交期、精度、装配、表面要求..."></textarea></div><div class="btn-row"><button type="button" class="btn btn-primary">提交预评估</button><a class="btn btn-secondary" href="/quote">进入报价页</a></div></form></div><div class="panel" style="padding:24px;"><div class="pill">Upload Rules</div><ul class="list-check" style="margin-top:14px;"><li>建议优先上传 STEP / STL</li><li>如有图纸，请附 PDF</li><li>说明验证目标有助于更快判断路径</li><li>复杂项目建议补充装配关系与数量</li></ul></div></div></div></section>
+
+<BaseLayout
+  title="RFQ上传 | VANMEE工程验证系统"
+  description="上传CAD文件进行工程验证、DFM分析与制造报价"
+>
+
+  <!-- 上传主区 -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <div class="grid-2" style="align-items:center; gap:40px;">
+
+        <!-- 左侧 -->
+        <div>
+          <div class="kicker">RFQ工程输入</div>
+
+          <h1 class="h1">
+            上传设计文件，获取工程验证结果
+          </h1>
+
+          <p class="lead">
+            我们会在生产前进行结构、装配与制造可行性分析，
+            不只是报价，而是工程判断与方案决策。
+          </p>
+
+          <div class="panel" style="margin-top:20px; padding:18px;">
+            <input type="file" style="width:100%;" />
+
+            <div style="margin-top:12px; display:flex; gap:10px;">
+              <select class="input">
+                <option>STEP / STP</option>
+                <option>STL</option>
+                <option>PDF</option>
+                <option>DWG</option>
+              </select>
+
+              <button class="btn btn-primary">开始工程分析</button>
+            </div>
+
+            <p class="muted" style="margin-top:10px;">
+              安全上传 · 支持NDA保密 · 24–72小时工程反馈
+            </p>
+          </div>
+        </div>
+
+        <!-- 右侧：DFM预览 -->
+        <div class="panel" style="padding:20px;">
+          <div class="kicker">DFM工程分析预览</div>
+
+          <h3 class="h3">制造可行性分析系统</h3>
+
+          <div class="grid-2" style="margin-top:14px;">
+            {processHints.map((h) => (
+              <div class="card">
+                <strong>{h.title}</strong>
+                <p class="muted">{h.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="divider" style="margin:18px 0;"></div>
+
+          <h4>输出内容包括</h4>
+          <ul class="muted">
+            <li>制造可行性评估</li>
+            <li>推荐工艺路径</li>
+            <li>结构与装配风险点</li>
+            <li>成本区间分析</li>
+            <li>交付周期建议</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 输入指南 -->
+  <section class="section">
+    <div class="container">
+
+      <SectionTitle
+        kicker="输入指南"
+        title="如何让工程分析更准确"
+        subtitle="输入质量决定工程判断质量"
+      />
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>产品定义</h3>
+          <p class="muted">用途 / 功能 / 使用场景</p>
+        </div>
+
+        <div class="card">
+          <h3>结构与尺寸</h3>
+          <p class="muted">尺寸 / 公差 / 装配关系</p>
+        </div>
+
+        <div class="card">
+          <h3>制造目标</h3>
+          <p class="muted">材料 / 数量 / 表面处理 / 交期</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 示例 -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <SectionTitle
+        kicker="示例输入"
+        title="典型工程RFQ参考"
+        subtitle="用于提升工程分析准确性"
+      />
+
+      <div class="grid-3">
+        {exampleInputs.map((i) => (
+          <div class="card">
+            <p class="muted">{i}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 定位强化 -->
+  <section class="section">
+    <div class="container">
+
+      <div class="panel" style="padding:26px;">
+        <div class="kicker">工程定位</div>
+
+        <h2 class="h2">
+          我们不是加工厂，而是工程决策系统
+        </h2>
+
+        <p class="lead">
+          在生产开始之前完成工程判断，让样件成为可量产验证结构，而不是一次性试制品。
+        </p>
+
+        <div class="grid-3" style="margin-top:18px;">
+          <div class="card">减少试错次数</div>
+          <div class="card">降低量产风险</div>
+          <div class="card">加速验证周期</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </BaseLayout>
