@@ -3,19 +3,242 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroTech from "../../components/common/HeroTech.astro";
 import SectionTitle from "../../components/common/SectionTitle.astro";
 import Stats from "../../components/common/Stats.astro";
-const metrics = [{ title: "2005+", desc: "Industrial origin" }, { title: "2015+", desc: "Additive manufacturing" }, { title: "72h", desc: "Engineering response" }, { title: "100+", desc: "Projects coordinated" }];
-const capabilities = [{ title: "Engineering Validation", desc: "Early assessment of assembly, structure, function, and manufacturability.", tag: "EVT / DVT / PVT" }, { title: "Prototype Delivery", desc: "Industrial prototypes, pilot runs, and validation samples.", tag: "Prototype / Trial Run" }, { title: "Manufacturing Coordination", desc: "CNC, 3D printing, sheet metal, finishing, and assembly.", tag: "Coordination" }];
-const workflow = [{ step: "01", title: "Requirements", text: "Upload files or describe goals, materials, lead time and validation stage." }, { step: "02", title: "Engineering Review", text: "Check wall thickness, tolerance, assembly, and process risks." }, { step: "03", title: "Quotation", text: "Receive process advice, price range and next-step suggestions." }, { step: "04", title: "Delivery", text: "Production, finishing, inspection and shipment." }];
-const industries = ["Automation", "Robotics", "Energy Equipment", "Medical Devices", "Automotive", "Research"];
-const cases = [{ title: "Robot Enclosure Validation", meta: "2200mm / 12 days", desc: "Split-part validation and assembly coordination for structure and appearance." }, { title: "Automation Prototype", meta: "For customer acceptance", desc: "Prototype-first workflow to speed up internal and customer review." }, { title: "Energy Storage Display Model", meta: "Multi-process coordination", desc: "Printing, painting and assembly for display-level delivery." }];
-const stats = [{ title: "SLA / SLS / FDM", desc: "Additive process matrix" }, { title: "CNC / Sheet Metal", desc: "Structural delivery" }, { title: "One-window", desc: "Project coordination" }, { title: "DFM", desc: "Front-loaded review" }];
+
+const metrics = [
+  { title: "2005+", desc: "Industrial engineering foundation" },
+  { title: "2015+", desc: "Additive manufacturing capability" },
+  { title: "24–72h", desc: "Engineering response window" },
+  { title: "1000+", desc: "Coordinated engineering projects" }
+];
+
+const capabilities = [
+  {
+    title: "Engineering Validation (EVT / DVT / PVT)",
+    desc: "Front-load manufacturability, assembly, functional and structural risks before mass production.",
+    tag: "Engineering System"
+  },
+  {
+    title: "Prototype & Pilot Production",
+    desc: "Industrial prototypes, validation samples and pilot runs for product development cycles.",
+    tag: "Prototype Delivery"
+  },
+  {
+    title: "Manufacturing Coordination",
+    desc: "Unified coordination of CNC, 3D printing, sheet metal, finishing and assembly processes.",
+    tag: "Multi-process System"
+  }
+];
+
+const workflow = [
+  {
+    step: "01",
+    title: "Requirement Intake",
+    text: "Upload STEP/STL/PDF files or describe product goals, materials, tolerances and validation stage."
+  },
+  {
+    step: "02",
+    title: "DFM Engineering Review",
+    text: "Evaluate geometry, wall thickness, tolerances, assembly structure and manufacturing risks."
+  },
+  {
+    step: "03",
+    title: "Process Plan & Quotation",
+    text: "Provide manufacturing routes, process comparison, cost range and delivery timeline."
+  },
+  {
+    step: "04",
+    title: "Build & Delivery",
+    text: "Production, finishing, assembly, inspection and validated delivery."
+  }
+];
+
+const industries = [
+  "Automation Equipment",
+  "Robotics",
+  "Energy Systems",
+  "Medical Devices",
+  "Automotive Components",
+  "R&D Institutions"
+];
+
+const cases = [
+  {
+    title: "Robot Enclosure Validation",
+    meta: "2200mm / 12 days",
+    desc: "Split-structure engineering and assembly validation for full-size robot housing."
+  },
+  {
+    title: "Automation Equipment Prototype",
+    meta: "Customer acceptance stage",
+    desc: "Parallel prototype execution for faster internal and client validation cycles."
+  },
+  {
+    title: "Energy Storage Display Model",
+    meta: "Multi-process integration",
+    desc: "3D printing, CNC machining, painting and assembly for full-scale display model."
+  }
+];
+
+const stats = [
+  { title: "SLA / SLS / FDM / FGF", desc: "Additive manufacturing matrix" },
+  { title: "CNC / Sheet Metal / Finishing", desc: "Structural manufacturing system" },
+  { title: "Project Coordination", desc: "Multi-process integration management" },
+  { title: "DFM Engineering", desc: "Front-loaded manufacturability analysis" }
+];
 ---
-<BaseLayout title="VANMEE | Product Engineering Validation & Smart Manufacturing" description="VANMEE focuses on engineering validation, prototype delivery and manufacturing coordination before mass production.">
-  <HeroTech kicker="VANMEE" title="Product validation and pre-production delivery" subtitle="Focus on engineering validation, prototype delivery and manufacturing coordination before mass production." primaryHref="/en/upload" primaryLabel="Upload Files" secondaryHref="/en/quote" secondaryLabel="Get Quote" metrics={metrics} chips={["STEP / STL", "DFM", "Prototype Delivery", "Coordination"]} titleRight="Engineering Validation & Manufacturing OS" />
-  <section class="section section-dark"><div class="container"><SectionTitle kicker="Core Value" title="We are not a single factory. We are an engineering decision and manufacturing coordination system." subtitle="Front-load engineering decisions, define manufacturing routes, and shorten delivery chains." /><div class="grid-3">{capabilities.map((c) => (<article class="card"><div class="pill">{c.tag}</div><h3 class="h3" style="margin-top:14px;">{c.title}</h3><p class="muted">{c.desc}</p></article>))}</div></div></section>
-  <section class="section"><div class="container"><SectionTitle kicker="Workflow" title="Shorter path, clearer decisions." subtitle="This homepage is the starting point of the project process, not just a brochure." /><div class="timeline">{workflow.map((item) => (<article class="timeline-item"><span class="pill">{item.step}</span><strong>{item.title}</strong><p>{item.text}</p></article>))}</div></div></section>
-  <section class="section section-dark"><div class="container"><SectionTitle kicker="Industries" title="Industry coverage" subtitle="Built for validation, trial production and multi-process coordination." /><div class="grid-3">{industries.map((item) => <div class="card" style="padding:18px 20px;">{item}</div>)}</div></div></section>
-  <section class="section"><div class="container"><SectionTitle kicker="Cases" title="Cases prove engineering judgment." subtitle="Each case should explain problem, solution and result." /><div class="grid-3">{cases.map((item) => (<article class="card"><div class="badge" style="margin-bottom:12px;">{item.meta}</div><h3 class="h3">{item.title}</h3><p class="muted">{item.desc}</p></article>))}</div></div></section>
-  <section class="section section-dark"><div class="container"><SectionTitle kicker="Capabilities" title="Manufacturing capability matrix" subtitle="Designed for prototypes, validation samples, structural parts and trial runs." /><Stats items={stats} /></div></section>
-  <section class="section"><div class="container"><div class="panel" style="padding:26px;"><div class="grid-2" style="align-items:center;"><div><div class="kicker">RFQ</div><h2 class="h2">Upload files and get engineering review + quotation.</h2><p class="lead">Supports STEP, STL, PDF, sketches and project briefs. Engineers will respond based on validation goals, materials, lead time and risk.</p></div><div style="justify-self:end;"><div class="btn-row"><a class="btn btn-primary" href="/en/upload">Upload Files</a><a class="btn btn-secondary" href="/en/contact">Contact</a></div></div></div></div></div></section>
+
+<BaseLayout
+  title="VANMEE | Engineering Validation & Manufacturing Coordination"
+  description="VANMEE focuses on EVT/DVT/PVT engineering validation, prototype delivery, and manufacturing coordination before mass production."
+>
+
+  <!-- HERO -->
+  <HeroTech
+    kicker="VANMEE"
+    title="Engineering validation & pre-production delivery system"
+    subtitle="We help hardware teams validate, prototype and coordinate manufacturing before mass production."
+    primaryHref="/en/upload"
+    primaryLabel="Upload RFQ"
+    secondaryHref="/en/quote"
+    secondaryLabel="Get Engineering Review"
+    metrics={metrics}
+    chips={["EVT / DVT / PVT", "DFM Analysis", "Multi-process Build", "24–72h Response"]}
+    titleRight="Engineering Validation & Manufacturing System"
+  />
+
+  <!-- POSITIONING -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="Positioning"
+        title="An engineering system, not a fabrication shop"
+        subtitle="We operate as a pre-production engineering and manufacturing coordination layer for hardware products."
+      />
+
+      <div class="grid-3">
+        <div class="card">We evaluate manufacturability before production starts.</div>
+        <div class="card">We define process routes instead of only producing parts.</div>
+        <div class="card">We coordinate multi-process manufacturing under one system.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUE -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="Core Capability"
+        title="Engineering-driven manufacturing coordination system"
+        subtitle="We front-load engineering decisions to reduce downstream production risks."
+      />
+
+      <div class="grid-3">
+        {capabilities.map((c) => (
+          <article class="card">
+            <div class="pill">{c.tag}</div>
+            <h3 class="h3">{c.title}</h3>
+            <p class="muted">{c.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="Workflow"
+        title="A structured path from RFQ to delivery"
+        subtitle="Designed for engineering decision-making, not fabrication requests."
+      />
+
+      <div class="timeline">
+        {workflow.map((item) => (
+          <article class="timeline-item">
+            <span class="pill">{item.step}</span>
+            <strong>{item.title}</strong>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="Industries"
+        title="Built for hardware development teams"
+        subtitle="Covering validation, prototyping and pre-production engineering."
+      />
+
+      <div class="grid-3">
+        {industries.map((item) => (
+          <div class="card">{item}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionTitle
+        kicker="Engineering Cases"
+        title="Cases represent engineering execution, not marketing"
+        subtitle="Each case reflects constraints, decisions and validated outcomes."
+      />
+
+      <div class="grid-3">
+        {cases.map((item) => (
+          <article class="card">
+            <div class="badge">{item.meta}</div>
+            <h3 class="h3">{item.title}</h3>
+            <p class="muted">{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITY MATRIX -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="Manufacturing System"
+        title="Integrated capability matrix"
+        subtitle="From prototyping to structural and functional validation builds."
+      />
+
+      <Stats items={stats} />
+    </div>
+  </section>
+
+  <!-- RFQ -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="panel" style="padding:28px;">
+        <div class="grid-2" style="align-items:center;">
+          <div>
+            <div class="kicker">RFQ SYSTEM</div>
+            <h2 class="h2">Upload files for engineering review and quotation</h2>
+            <p class="lead">
+              Submit STEP / STL / PDF files. We evaluate manufacturability, define process routes,
+              and provide engineering-based quotation and delivery planning.
+            </p>
+          </div>
+
+          <div style="justify-self:end;">
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/en/upload">Upload RFQ</a>
+              <a class="btn btn-secondary" href="/en/contact">Contact Engineering Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
