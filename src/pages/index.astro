@@ -5,23 +5,51 @@ import SectionTitle from "../components/common/SectionTitle.astro";
 import Stats from "../components/common/Stats.astro";
 
 const metrics = [
-  { title: "2005+", desc: "工业工程业务起点" },
-  { title: "2015+", desc: "增材制造技术积累" },
-  { title: "24h", desc: "工程响应周期" },
-  { title: "1000+", desc: "项目协同交付经验" }
+  { title: "2005+", desc: "工业工程体系起点" },
+  { title: "2015+", desc: "增材制造与样机经验积累" },
+  { title: "24h", desc: "工程评估响应时间" },
+  { title: "1000+", desc: "工程项目协同交付" }
 ];
 
 const capabilities = [
-  { title: "工程验证", desc: "围绕结构、装配、功能与制造可行性进行前置评估与风险识别。", tag: "EVT工程验证 / DVT设计验证 / PVT量产验证" },
-  { title: "试制交付", desc: "支持工业样机、小批量试制与工程验证样件生产与交付。", tag: "样机 / 试制生产" },
-  { title: "制造协同", desc: "整合3D打印、CNC加工、钣金与表面处理，实现一体化交付。", tag: "多工艺协同制造" }
+  {
+    title: "工程验证（EVT / DVT / PVT）",
+    desc: "围绕结构、装配、功能与制造可行性进行前置评估与风险控制，在试制阶段降低量产风险。",
+    tag: "Engineering Validation"
+  },
+  {
+    title: "试制交付（Prototype & Pilot Run）",
+    desc: "支持工业样机、小批量试制与验证件生产，覆盖从打样到装配确认的完整链路。",
+    tag: "Prototype Delivery"
+  },
+  {
+    title: "制造协同（Multi-process Manufacturing）",
+    desc: "整合3D打印、CNC、钣金与表面处理，实现多工艺统一交付与项目管理。",
+    tag: "Manufacturing Integration"
+  }
 ];
 
 const workflow = [
-  { step: "01", title: "提交需求", text: "上传模型或说明资料，明确用途、材料、交期与验证目标。" },
-  { step: "02", title: "工程评估", text: "分析壁厚、装配关系、公差控制、结构强度及制造风险。" },
-  { step: "03", title: "工艺方案与报价", text: "提供加工方式建议、制作方案对比、报价区间及交付周期。" },
-  { step: "04", title: "试制生产与交付", text: "完成加工制作、后处理、装配、检验与最终交付。" }
+  {
+    step: "01",
+    title: "提交需求（RFQ Intake）",
+    text: "上传STEP/STL/PDF，明确用途、材料、交期与验证目标。"
+  },
+  {
+    step: "02",
+    title: "工程评估（DFM Review）",
+    text: "分析壁厚、结构强度、公差配合、装配关系与制造风险。"
+  },
+  {
+    step: "03",
+    title: "工艺方案 & 报价（Process Plan）",
+    text: "提供工艺路径对比、材料建议、成本区间与交付周期。"
+  },
+  {
+    step: "04",
+    title: "试制与交付（Build & Delivery）",
+    text: "完成加工、后处理、装配、检验与工程验证交付。"
+  }
 ];
 
 const industries = [
@@ -35,57 +63,80 @@ const industries = [
 
 const cases = [
   {
-    title: "机器人外壳验证项目",
-    meta: "2200mm / 12天交付",
-    desc: "通过分件设计与装配验证，实现结构与外观同步确认。"
+    title: "机器人外壳工程验证",
+    meta: "2200mm / 12天",
+    desc: "通过分件设计 + 装配验证，实现结构与外观同步确认并完成交付。"
   },
   {
-    title: "自动化设备样机",
-    meta: "用于客户验收",
-    desc: "用于客户评审与内部验证，加快决策与交付周期。"
+    title: "自动化设备样机验证",
+    meta: "客户验收级交付",
+    desc: "同步推进结构件与装配件试制，加速客户评审与决策周期。"
   },
   {
-    title: "新能源储能设备展示模型",
+    title: "储能设备展示级模型",
     meta: "多工艺协同",
-    desc: "整合3D打印、喷涂与装配，实现展示级整体交付。"
+    desc: "3D打印 + CNC + 喷涂 + 装配，实现工业级展示交付。"
   }
 ];
 
 const stats = [
-  { title: "SLA / SLS / SLM/FDM/FGF", desc: "增材制造工艺体系" },
-  { title: "CNC / 钣金 / 装配", desc: "结构件与零部件加工交付" },
-  { title: "项目整合", desc: "统一对接与项目管理" },
-  { title: "工程判断", desc: "前置制造可行性评估" }
+  { title: "SLA / SLS / SLM / FDM / FGF", desc: "增材制造体系" },
+  { title: "CNC / 钣金 / 表面处理", desc: "精密加工体系" },
+  { title: "Project Integration", desc: "跨工艺项目协同管理" },
+  { title: "DFM Engineering", desc: "前置制造可行性评估" }
 ];
 ---
 
-<BaseLayout title="VANMEE 凡觅 | 产品工程验证与智造协同服务" description="VANMEE 凡觅专注于产品量产前的工程验证、试制生产与智造协同服务。">
+<BaseLayout
+  title="VANMEE 凡觅 | 产品量产前工程验证与试制交付"
+  description="VANMEE 凡觅专注产品量产前工程验证（EVT/DVT/PVT）、试制生产与多工艺制造协同交付服务。"
+>
 
+  <!-- HERO -->
   <HeroTech
     kicker="VANMEE 凡觅"
     title="产品量产前工程验证与试制交付"
-    subtitle="专注产品量产前的工程验证、试制生产与智造协同，让产品更快完成落地。"
+    subtitle="专注EVT/DVT/PVT工程验证、试制生产与制造协同，加速产品从设计到量产落地"
     primaryHref="/upload"
-    primaryLabel="上传文件"
+    primaryLabel="上传RFQ文件"
     secondaryHref="/quote"
-    secondaryLabel="获取报价"
+    secondaryLabel="获取工程评估"
     metrics={metrics}
-    chips={["STEP / STL", "工程评估", "试制生产", "制造协同"]}
-    titleRight="工程验证与智造协同系统"
+    chips={["EVT / DVT / PVT", "DFM工程分析", "多工艺协同", "24h响应"]}
+    titleRight="Engineering Validation & Manufacturing System"
   />
 
+  <!-- PROBLEM -->
   <section class="section section-dark">
     <div class="container">
       <SectionTitle
-        kicker="核心价值"
-        title="我们是产品工程验证与智造协同系统"
-        subtitle="把工程问题提前判断，把制造方案提前确定，把交付流程压缩到最短"
+        kicker="工程痛点"
+        title="为什么产品总卡在量产前？"
+        subtitle="问题不在设计，而在工程验证与制造协同"
       />
+
+      <div class="grid-3">
+        <div class="card">结构与装配缺乏验证，试制阶段才暴露问题</div>
+        <div class="card">工艺路径不清晰，成本与周期不可控</div>
+        <div class="card">多供应商协同困难，交付缺乏统一管理</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        kicker="核心能力"
+        title="工程验证驱动的制造协同系统"
+        subtitle="把工程判断前移，把制造风险前置，把交付过程结构化"
+      />
+
       <div class="grid-3">
         {capabilities.map((c) => (
           <article class="card">
             <div class="pill">{c.tag}</div>
-            <h3 class="h3" style="margin-top:14px;">{c.title}</h3>
+            <h3 class="h3">{c.title}</h3>
             <p class="muted">{c.desc}</p>
           </article>
         ))}
@@ -93,13 +144,15 @@ const stats = [
     </div>
   </section>
 
-  <section class="section">
+  <!-- WORKFLOW -->
+  <section class="section section-dark">
     <div class="container">
       <SectionTitle
-        kicker="服务流程"
-        title="从需求到交付，每一步更清晰、更可执行"
-        subtitle="这是项目推进流程，而不是展示内容"
+        kicker="工程流程"
+        title="从RFQ到交付的工程闭环"
+        subtitle="标准化工程推进路径，而不是简单加工流程"
       />
+
       <div class="timeline">
         {workflow.map((item) => (
           <article class="timeline-item">
@@ -112,68 +165,74 @@ const stats = [
     </div>
   </section>
 
-  <section class="section section-dark">
+  <!-- INDUSTRY -->
+  <section class="section">
     <div class="container">
       <SectionTitle
         kicker="行业应用"
-        title="服务行业场景"
-        subtitle="面向产品开发、试制验证与工程交付场景"
+        title="服务产品研发与工业制造团队"
+        subtitle="覆盖典型工程验证与试制场景"
       />
+
       <div class="grid-3">
-        {industries.map((item) => (
-          <div class="card" style="padding:18px 20px;">
-            {item}
-          </div>
+        {industries.map((i) => (
+          <div class="card">{i}</div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- CASE -->
+  <section class="section section-dark">
     <div class="container">
       <SectionTitle
-        kicker="项目案例"
-        title="案例不是展示，而是工程交付结果"
-        subtitle="重点说明问题、解决方式与交付结果"
+        kicker="工程案例"
+        title="案例即交付结果"
+        subtitle="强调问题、方法与工程结果"
       />
+
       <div class="grid-3">
-        {cases.map((item) => (
+        {cases.map((c) => (
           <article class="card">
-            <div class="badge" style="margin-bottom:12px;">{item.meta}</div>
-            <h3 class="h3">{item.title}</h3>
-            <p class="muted">{item.desc}</p>
+            <div class="badge">{c.meta}</div>
+            <h3 class="h3">{c.title}</h3>
+            <p class="muted">{c.desc}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-dark">
+  <!-- CAPABILITY -->
+  <section class="section">
     <div class="container">
       <SectionTitle
-        kicker="智造能力"
-        title="智造与交付能力体系"
-        subtitle="围绕样机、结构件与试制交付构建能力矩阵"
+        kicker="制造能力"
+        title="工程与制造一体化能力体系"
+        subtitle="支持复杂结构与多工艺交付"
       />
+
       <Stats items={stats} />
     </div>
   </section>
 
-  <section class="section">
+  <!-- RFQ -->
+  <section class="section section-dark">
     <div class="container">
-      <div class="panel" style="padding:26px;">
+      <div class="panel" style="padding:28px;">
         <div class="grid-2" style="align-items:center;">
           <div>
-            <div class="kicker">RFQ</div>
-            <h2 class="h2">上传文件，获取工程评估与报价方案</h2>
+            <div class="kicker">RFQ SYSTEM</div>
+            <h2 class="h2">上传文件，获取工程评估与制造方案</h2>
             <p class="lead">
-              支持 STEP、STL、PDF、草图及项目说明。我们将根据用途、结构、材料、交期与风险点，给出制造方案与报价建议。
+              支持STEP / STL / PDF / DWG。我们基于DFM工程分析提供工艺路径、风险评估与报价建议。
             </p>
           </div>
+
           <div style="justify-self:end;">
             <div class="btn-row">
-              <a class="btn btn-primary" href="/upload">上传文件</a>
-              <a class="btn btn-secondary" href="/contact">联系凡觅</a>
+              <a class="btn btn-primary" href="/upload">上传RFQ</a>
+              <a class="btn btn-secondary" href="/contact">联系工程团队</a>
             </div>
           </div>
         </div>
