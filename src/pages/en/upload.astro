@@ -1,7 +1,183 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionTitle from "../../components/common/SectionTitle.astro";
+
+const processHints = [
+  {
+    title: "Geometry Check",
+    desc: "Wall thickness, undercuts, assembly feasibility"
+  },
+  {
+    title: "Process Suggestion",
+    desc: "SLA / SLS / CNC / Sheet metal selection"
+  },
+  {
+    title: "Risk Detection",
+    desc: "Structural risk, tolerance risk, assembly risk"
+  },
+  {
+    title: "Cost Estimation",
+    desc: "Range-based quotation with engineering logic"
+  }
+];
+
+const exampleInputs = [
+  "Robot enclosure / ABS / 1200mm / assembly required",
+  "Medical device housing / high precision / surface finishing",
+  "Energy storage module / multi-part assembly / pilot run"
+];
 ---
-<BaseLayout title="Upload | VANMEE" description="Upload STEP, STL or PDF files to get engineering review.">
-  <section class="section"><div class="container"><SectionTitle kicker="Upload" title="Upload files" subtitle="Supports STEP, STL, PDF and project briefs." /><div class="content-grid"><div class="panel" style="padding:24px;"><form class="form"><div class="field"><label>File upload</label><input class="input" type="file" /></div><div class="field"><label>Project type</label><select class="select"><option>Validation model</option><option>Structural part</option><option>Assembly part</option><option>Trial run</option></select></div><div class="field"><label>Short brief</label><textarea class="textarea" placeholder="Material, quantity, lead time, precision, assembly, finish..."></textarea></div><div class="btn-row"><button type="button" class="btn btn-primary">Submit Review</button><a class="btn btn-secondary" href="/en/quote">Go to Quote</a></div></form></div><div class="panel" style="padding:24px;"><div class="pill">Upload Rules</div><ul class="list-check" style="margin-top:14px;"><li>STEP / STL is preferred</li><li>Attach PDF drawings if available</li><li>Validation goals help us decide faster</li><li>Complex projects benefit from fit and quantity details</li></ul></div></div></div></section>
+
+<BaseLayout
+  title="RFQ Upload | VANMEE Engineering System"
+  description="Upload CAD files for engineering validation, DFM analysis and manufacturing quotation."
+>
+
+  <!-- HERO UPLOAD -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <div class="grid-2" style="align-items:center; gap:40px;">
+
+        <!-- LEFT -->
+        <div>
+          <div class="kicker">RFQ ENGINEERING INPUT</div>
+
+          <h1 class="h1">
+            Upload your design for engineering validation
+          </h1>
+
+          <p class="lead">
+            We analyze manufacturability, structure, assembly and process risks before production.
+            This is not just quoting — it is engineering decision-making.
+          </p>
+
+          <div class="panel" style="margin-top:20px; padding:18px;">
+            <input type="file" style="width:100%;" />
+
+            <div style="margin-top:12px; display:flex; gap:10px;">
+              <select class="input">
+                <option>STEP / STP</option>
+                <option>STL</option>
+                <option>PDF</option>
+                <option>DWG</option>
+              </select>
+
+              <button class="btn btn-primary">Analyze RFQ</button>
+            </div>
+
+            <p class="muted" style="margin-top:10px;">
+              Secure upload · NDA supported · Engineering review within 24–72h
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="panel" style="padding:20px;">
+          <div class="kicker">SYSTEM OUTPUT PREVIEW</div>
+
+          <h3 class="h3">Engineering DFM Analysis</h3>
+
+          <div class="grid-2" style="margin-top:14px;">
+            {processHints.map((h) => (
+              <div class="card">
+                <strong>{h.title}</strong>
+                <p class="muted">{h.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="divider" style="margin:18px 0;"></div>
+
+          <h4>Expected Output</h4>
+          <ul class="muted">
+            <li>Manufacturing feasibility assessment</li>
+            <li>Recommended process route</li>
+            <li>Risk points & design optimization advice</li>
+            <li>Cost range estimation</li>
+            <li>Delivery timeline suggestion</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INPUT GUIDE -->
+  <section class="section">
+    <div class="container">
+
+      <SectionTitle
+        kicker="Input Guide"
+        title="What you should include in RFQ"
+        subtitle="Better input = more accurate engineering decision"
+      />
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Product Definition</h3>
+          <p class="muted">Purpose, function, usage scenario</p>
+        </div>
+
+        <div class="card">
+          <h3>Geometry & Size</h3>
+          <p class="muted">Dimensions, tolerance, assembly structure</p>
+        </div>
+
+        <div class="card">
+          <h3>Manufacturing Target</h3>
+          <p class="muted">Material, finish, quantity, lead time</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <SectionTitle
+        kicker="Example RFQ"
+        title="Typical engineering inputs"
+        subtitle="Use these as reference for better engineering evaluation"
+      />
+
+      <div class="grid-3">
+        {exampleInputs.map((i) => (
+          <div class="card">
+            <p class="muted">{i}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VALUE POSITION -->
+  <section class="section">
+    <div class="container">
+
+      <div class="panel" style="padding:26px;">
+        <div class="kicker">ENGINEERING POSITIONING</div>
+
+        <h2 class="h2">
+          We do not just manufacture parts.
+        </h2>
+
+        <p class="lead">
+          We make engineering decisions before production starts — 
+          so your prototype becomes a production-ready system, not just a sample.
+        </p>
+
+        <div class="grid-3" style="margin-top:18px;">
+          <div class="card">Reduce iteration cycles</div>
+          <div class="card">Avoid production failures</div>
+          <div class="card">Shorten time-to-validate</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </BaseLayout>
