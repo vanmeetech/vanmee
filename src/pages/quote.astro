@@ -2,75 +2,155 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="RFQ System V2">
+<BaseLayout title="DFM Visual Engine | VANMEE">
 
 <div class="container section">
 
-  <h1 class="h1">工业报价系统</h1>
+  <h1 class="h1">DFM工程可视化分析</h1>
+
+  <p class="muted">
+    STEP模型结构分析 + 制造风险可视化 + 工艺路径映射
+  </p>
 
   <!-- UPLOAD -->
   <div class="panel" style="padding:20px;margin-top:20px">
+
     <input type="file" id="file" />
 
-    <button class="btn btn-primary" onclick="analyze()">
-      分析模型
+    <button class="btn btn-primary" onclick="runDFM()">
+      生成工程分析
     </button>
+
+    <p class="muted" style="margin-top:10px">
+      自动解析结构 / 壁厚 / 装配 / 制造风险
+    </p>
+
   </div>
 
-  <!-- RESULT -->
+  <!-- MAIN VISUAL AREA -->
   <div class="grid-2" style="margin-top:20px">
 
-    <div class="card">
-      <h3>DFM评分</h3>
-      <div id="score">--</div>
+    <!-- 3D VIEW -->
+    <div class="panel" style="padding:20px; height:500px;">
+      <h3>模型结构视图</h3>
+      <div id="viewer" style="height:420px;background:#111;border-radius:8px;">
+        <!-- Three.js canvas here -->
+      </div>
     </div>
 
-    <div class="card">
-      <h3>风险</h3>
-      <ul id="issues"></ul>
+    <!-- DFM SUMMARY -->
+    <div class="panel" style="padding:20px;">
+
+      <h3>工程分析结果</h3>
+
+      <div class="grid-2">
+
+        <div class="card">
+          <h4>可制造评分</h4>
+          <div id="score" class="h2">--</div>
+        </div>
+
+        <div class="card">
+          <h4>工艺建议</h4>
+          <div id="process">--</div>
+        </div>
+
+        <div class="card">
+          <h4>风险等级</h4>
+          <div id="riskLevel">--</div>
+        </div>
+
+        <div class="card">
+          <h4>结构复杂度</h4>
+          <div id="complexity">--</div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
-  <!-- QUOTE -->
+  <!-- RISK HEATMAP -->
   <div class="panel" style="margin-top:20px;padding:20px">
-    <h3>报价结果</h3>
-    <div id="price">--</div>
+
+    <h3>制造风险热力图</h3>
+
+    <div id="heatmap" style="height:300px;background:#0f0f0f;border-radius:8px;">
+      <!-- heatmap overlay -->
+    </div>
+
+  </div>
+
+  <!-- PROCESS MAP -->
+  <div class="panel" style="margin-top:20px;padding:20px">
+
+    <h3>工艺路径映射</h3>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <strong>SLA</strong>
+        <p class="muted">高精度细节 / 外观件</p>
+        <div id="slaScore">--</div>
+      </div>
+
+      <div class="card">
+        <strong>SLS</strong>
+        <p class="muted">功能结构 / 强度件</p>
+        <div id="slsScore">--</div>
+      </div>
+
+      <div class="card">
+        <strong>CNC</strong>
+        <p class="muted">高强度 / 精密零件</p>
+        <div id="cncScore">--</div>
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 <script>
-async function analyze(){
+async function runDFM(){
 
   const file = document.getElementById('file').files[0];
+
+  if(!file){
+    alert("请上传STEP/STL文件");
+    return;
+  }
 
   const form = new FormData();
   form.append('file', file);
 
-  const res = await fetch('/api/analyze', {
+  const res = await fetch('/api/dfm-visual', {
     method:'POST',
     body:form
   });
 
   const data = await res.json();
 
-  document.getElementById('score').innerText = data.dfm.score;
+  // ===== BASIC =====
+  document.getElementById('score').innerText = data.score;
+  document.getElementById('process').innerText = data.process;
+  document.getElementById('riskLevel').innerText = data.risk;
+  document.getElementById('complexity').innerText = data.complexity;
 
-  document.getElementById('issues').innerHTML =
-    data.dfm.issues.map(i => `<li>${i}</li>`).join('');
+  // ===== PROCESS MATCH =====
+  document.getElementById('slaScore').innerText = data.processMap.sla;
+  document.getElementById('slsScore').innerText = data.processMap.sls;
+  document.getElementById('cncScore').innerText = data.processMap.cnc;
 
-  const q = await fetch('/api/quote',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(data)
-  });
+  // ===== 3D VIEW (placeholder) =====
+  document.getElementById('viewer').innerHTML =
+    "<p style='color:#888;padding:20px'>STEP模型解析结果将在Three.js中渲染</p>";
 
-  const quote = await q.json();
-
-  document.getElementById('price').innerText =
-    "¥ " + quote.quote.final;
-
+  // ===== HEATMAP =====
+  document.getElementById('heatmap').innerHTML =
+    "<p style='color:#888;padding:20px'>结构风险热力图（壁厚/应力/装配分析）</p>";
 }
 </script>
 
